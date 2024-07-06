@@ -2,4 +2,7 @@ Type of memory in java ? what variables are stored in which area
 why is range -128 to 127
 How instance variables are thrad safe variables 59.00
 How to import two same name classes
+what is this.hashCode do ?
 
+
+Whenever we are creating an object automatically constructor will be executed but it may be one constructor or multiple constructor (multiple how ?)
