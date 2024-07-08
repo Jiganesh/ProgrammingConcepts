@@ -6,3 +6,5 @@ what is this.hashCode do ?
 
 
 Whenever we are creating an object automatically constructor will be executed but it may be one constructor or multiple constructor (multiple how ?)
+
+why getter method does not need get ?
