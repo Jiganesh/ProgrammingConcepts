@@ -396,3 +396,208 @@ a();
 ```
 
 
+
+**let and const in JS**
+
+
+let and const are hoisted. 
+
+```js
+console.log(a)
+let a = 10
+var b = 100
+```
+```
+Uncaught ReferenceError: cannot access 'a' before initialization at index.js:1
+```
+
+
+Memory is assigned to var declaration and this var was attached to the global object but for let and const they are stored in separate memory space than global and you cannot access then unless let and const variables are initialized.
+
+
+Temporal dead zone is time from when let variable was hoisted and when it was initialized.
+
+```js
+console.log(x)
+
+let a = 10
+var b = 100
+```
+```
+Uncaught ReferenceError: x is not defined index.js:1
+```
+
+
+
+
+```js
+console.log(x)
+
+let a = 10
+let a  = 100
+```
+```
+Uncaught SyntaxError : Identified 'a' has already been declared
+```
+
+
+```js
+console.log(x)
+
+let a = 10
+var a  = 100
+```
+```
+Uncaught SyntaxError : Identified 'a' has already been declared
+```
+
+
+
+
+In let you can initialize after but in const you have to initialize it while declaring.
+In let you cannot re-declare and in const you cannot re-initialize it
+
+
+```js
+
+let a;
+
+const b;
+
+b = 1000;
+
+a= 10;
+console.log(a);
+```
+
+
+```
+Uncaught SyntaxError: Missing Initializer in const declaration
+```
+
+```js
+
+let a;
+
+const b = 100;
+
+b = 1000;
+```
+```
+Uncaught TypeError: Assignment to constant variable at index.js:6
+```
+
+How to avoid temporal deadzone ?
+
+Initialize at top
+
+
+
+**Block Scope and Shadowing in JS**
+
+
+
+
+Block is defined by curly braces. Block is also known as compound statement. We group multiple statements in a block where js expects one one statment.
+
+
+Block Scope : what all variable and function we can access inside this block.
+
+```
+{
+
+    var a = 10;
+    let b = 20;
+    const c = 30;
+
+}
+
+```
+
+let and const are block scoped
+
+
+```js
+
+var a = 100
+
+
+{
+    var a = 10;
+
+    console.log(a);
+}
+
+console.log(a)
+
+```
+```
+10
+10
+```
+
+
+a was shadowed and the value was also modified
+
+
+
+```js
+
+let b = 100
+
+
+{
+    let b = 10;
+
+    console.log(b);
+}
+
+console.log(b)
+
+```
+```
+10
+100
+```
+
+
+**Illegal shadowing**
+```js
+
+let a = 20;
+
+{
+    var a = 100; // crossing the boundary of block and going to global
+}
+
+```
+
+
+Perfectly valid shadowing
+
+
+```js
+
+var a = 20;
+
+{
+    let a = 100;
+}
+
+```
+
+
+```js
+
+var a = 20;
+
+function x(){
+    let a = 100;
+}
+
+```
+
+
+**Closures**
+
+
