@@ -600,4 +600,539 @@ function x(){
 
 **Closures**
 
+```js
 
+function x(){
+    var a = 7;
+    function y(){
+        console.log(a);
+    }
+    y()
+}
+x()
+```
+
+Function along with its lexical scope forms a closure
+
+
+A closure is function bundled together to its lexical state.
+
+
+
+```js
+
+function x(){
+    var a = 7;
+    function y(){
+        console.log(a);
+    }
+    return y;
+}
+
+var z = x();
+console.log(z);
+
+```
+```
+f y(){
+    console.log(a);
+}
+```
+
+now x() execution context is gone, nothing is there what will z() print
+
+
+Z will rememeber its lexical scope as not only the funtion was returned but clousure was returned.
+
+
+
+```js
+function x(){
+    var a = 7;
+
+    return function y(){
+        console.log(a);
+    }
+}
+
+var z = x ();
+console.log(z);
+
+z();
+```
+>7
+
+
+
+
+```js
+function x(){
+    var a = 7;
+    function y(){
+        console.log(a);
+    }
+    a = 1000
+    return y;
+}
+
+var z = x();
+z();
+```
+
+> 1000
+
+
+```js
+
+
+function z (){
+    var b = 990;
+    function x(){
+        var a = 7;
+        function y(){
+            console.log(a, b);
+        }
+        y();
+    }
+    x();
+}
+z();
+```
+
+
+Where are clousure used ?
+
+- Module design pattern
+- currying in Js
+- functions like once
+- memoize
+- maintaining state in async world
+- setTimeouts
+- Iterators
+- and many more
+
+
+
+**setTimeout + Closures Interview Questions**
+```js
+// Javascript waits for none
+
+function x(){
+    var i = 1;
+    setTimeout(fucntion(){ //program does not wait it will work on next line
+        console.log(i);
+    }, 1000);
+
+    console.log("Namaste Javascript")
+}
+
+
+```
+
+setTimeout puts the reference of the function with the timer and once the timer expires it takes that reference with closure, puts it in call stack again and executes it.
+
+```js
+
+// Print 1 to n after 1 seconds
+
+
+for (var i =1 ; i<=5 ; i++){
+    setTimeout(function(){
+        console.log(i)
+    }, i*1000);
+}
+
+```
+
+```
+6
+6
+6
+6
+6
+```
+
+
+setTimeout remembers reference to i but not value of i hence i will be pointing to same reference of i where i is 6 after execution of the code. Javascript waits for none and it will store the reference and when the timer expires it is too late and i is now 6 and by the time we log - we will log 6 which is i refererring to 6
+
+```js
+
+// Fixing above code Print 1 to n after 1 seconds
+
+
+for (let i =1 ; i<=5 ; i++){
+    setTimeout(function(){
+        console.log(i)
+    }, i*1000);
+}
+
+```
+
+```
+1
+2
+3
+4
+5
+```
+
+let has block scope so for each iteration i is a new variable and with each iteration i has its own copy with it.
+
+
+
+```js
+
+// Fixing above code without let Print 1 to n after 1 seconds
+
+
+for (var i =1 ; i<=5 ; i++){
+
+    function close(x){
+        setTimeout(function(){
+            console.log(x)
+        }, x*1000);
+    }
+    close(i)
+   
+}
+
+```
+
+```
+1
+2
+3
+4
+5
+```
+
+**Interviews**
+
+Can you explain what closure is and give an example for clousure ?
+
+
+
+Data hiding and encapsulation 
+
+
+```js
+function counter (){
+    var count  = 0 
+
+    return function incrementCounter(){
+        count++;
+        console.log(count)
+    }
+
+}
+
+
+var counter1 = counter()
+
+counter1();
+counter1();
+
+
+var counter2 = counter() // new instance
+counter2();
+counter2();
+```
+
+
+Constructor
+
+
+```js
+function Counter (){
+    var count  = 0 
+
+    this.incrementCounter(){
+        count++;
+        console.log(count)
+    }
+
+    this.decrementCounter(){
+        count--;
+        console.log(count)
+    }
+}
+
+var counter1 = new Counter();
+
+counter1.increamentCounter();
+counter1.increamentCounter();
+counter1.decrementCounter();
+
+```
+
+
+Disadvantages of closure
+
+
+Over consumption of memory
+
+Not garbage collected
+
+Freeze browser
+
+
+
+Garbage collector in JS whenever there is unused variable it removes these variable. relation between garbage collector and closure - 
+
+
+
+
+
+
+```js
+
+function a (){
+    var x = 0
+    return function b (){
+        console.log(x);
+    }
+}
+```
+
+var y = a();
+
+
+x memory cannot be freed unless y is used, some modern browser have check if variable is not reached and unused then they are smartly removed from memory
+
+
+**First Class functions**
+
+What is anonymous functions ?
+
+What are first class functions in Javascript ?
+
+What is difference between fucntion statement, function expression, function declaration ?
+
+
+
+
+**Function statement = Function Declaration**
+
+
+```js
+
+function a(){
+
+    console.log("a called");
+
+}
+
+// This way of creating function is called function statement
+
+```
+
+
+**Function Expression**
+
+Function can be assigned to a variable 
+
+```js
+
+var b = function (){
+    console.log("b called")
+}
+
+```
+
+Different between function statement and function expression
+- Major difference is hoisting - During the memory creation phase function a is allocated memory and function is assigned to memory, In case of b it is treated like variable and assigned the value undefined untill the code execution phase
+
+
+
+**Anonymous Function**
+
+```js
+function(){
+
+}
+
+```
+
+According to ECMA Script a function name should always have a name otherwise it will throw
+
+
+Uncaught SyntaxError : Function index.js:15 statements require a function name
+
+But Anonymous functions can be used as variables.
+
+
+
+**Named Function Expression**
+
+```js
+
+var b = function xyz (){
+    console.log("b called")
+}
+
+b() // b called
+xyz() // Uncaught ReferenceError : xyz is not defined
+
+```
+
+xyz is not function created in outerscope but created as local variable
+
+
+```js
+
+var b = function xyz (){
+    console.log(xyz)
+}
+```
+
+
+Difference between parameter and Arguments ?
+
+
+```js
+
+var b = function (param1, param2){
+    
+}
+
+b(arg1, arg2)
+
+```
+
+
+**First class functions = First class citizens**
+
+Ability to be used as values
+
+The ability of functions to be used as values and can be passed as arguments to another functions and to be returned from functions this ability is first class functions
+
+
+
+```js
+
+var b = function (param1, param2){
+
+    return param1 // returning function
+    
+}
+
+arg1 = function(){
+    console.log("arg1")
+}
+
+
+arg2 = function(){
+    console.log("arg2")
+}
+
+
+b(arg1, arg2) // passing functions are argument
+
+```
+
+
+**Arrow Functions**
+
+
+
+
+**Callback Functions**
+
+// Blocking the main thread
+
+```js
+function x(){
+    console.log("x is called");
+    y();
+}
+
+x(function y(){
+    console.log("y is called");
+})
+```
+
+A callback function is a function passed into another function as an argument, which is then invoked inside the outer function to complete some kind of routine or action.
+
+
+Javascript is synchronous and single threaded language
+
+Blocking the main thread
+
+power of callbacks
+
+
+// Event Listeners
+
+
+> document.getElementById("clickMe").addEventListner("click", function xyz(){console.log("clicked")})
+
+
+
+EventListner and closures
+
+```js
+
+function attachEventListeners(){
+    let count = 0;
+    document.getElementById("clickMe").addEventListener("click", console.log("Button Clicked", ++count));
+};
+
+attachEventListeners();
+```
+
+Garbage Collection and Event Listener
+
+
+EventListeners are heavy, When page has lot of eventlisteners the page can be slow due to all these closures, scopes. It can be garbage collected with removeEventListeners
+
+
+
+
+** Asynchronous Javascript and EventLoop**
+
+It has one callstack and it can only do one thing
+
+All code is executed inside this callstack
+
+Recapping GEC is created while running a program and it is put inside the callstack
+
+setTimeout is not part of Javascript
+
+
+setTimeout, DOM APIs - document.etc , fetch(), localStorage, console from console.log, location is not part of Javascript they are Web API's in browsers. They are powers from browsers
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Functions are very beautiful in javascipt
+
+
+Time tide and javascripts waits for none
