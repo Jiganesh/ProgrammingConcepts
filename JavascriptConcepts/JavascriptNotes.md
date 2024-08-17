@@ -1103,16 +1103,73 @@ setTimeout, DOM APIs - document.etc , fetch(), localStorage, console from consol
 
 
 
+**Higher Order functions**
+
+
+Function which can take another function as an argument or return function as value they are called higher order functions
 
 
 
+```js
+
+const radius = [3, 1, 2, 4]
+
+const calculateArea = function (radius){
+    const output = []
+    for (let i = 0 ; i < radius.length ; i++){
+        output.push(Math.PI * radius[i] * radius[i])
+    }
+
+    return output
+}
 
 
+const calculateCircumference = function (radius){
+    const output = []
+    for (let i = 0 ; i < radius.length ; i++){
+        output.push(2 * Math.PI * radius[i] )
+    }
+
+    return output
+}
+
+const calculateDiameter = function (radius){
+    const output = []
+    for (let i = 0 ; i < radius.length ; i++){
+        output.push(2 * radius[i] )
+    }
+
+    return output
+}
+
+```
+
+```js
+const radius = [3, 1, 2, 4]
 
 
+const area = function (radius){
+    return Math.PI * radius  * radius
+}
 
 
+const circumference = function (radius){
+    return 2 * Math.PI * radius
+}
 
+const diameter = function (radius){
+    return 2 * radius
+}
+ 
+const calculate = function (radius, logic){
+    const output = []
+    for ( let  i = 0;  i < radius.length ; i++){
+        output.push(logic(radius[i]))
+    }
+    return output
+}
+
+```
 
 
 
