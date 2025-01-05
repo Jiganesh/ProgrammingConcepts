@@ -1033,6 +1033,8 @@ b(arg1, arg2) // passing functions are argument
 
 **Arrow Functions**
 
+Learn on yourself
+
 
 
 
@@ -1068,7 +1070,7 @@ power of callbacks
 
 
 
-EventListner and closures
+EventListener and closures
 
 ```js
 
@@ -1088,7 +1090,7 @@ EventListeners are heavy, When page has lot of eventlisteners the page can be sl
 
 
 
-** Asynchronous Javascript and EventLoop**
+**Asynchronous Javascript and EventLoop**
 
 It has one callstack and it can only do one thing
 
