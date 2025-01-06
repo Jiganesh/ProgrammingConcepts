@@ -1106,9 +1106,9 @@ setTimeout, DOM APIs - `document.` etc , fetch(), localStorage, console from con
 
 **Javascript Exposed**
 
-Chrome - V8 JS Engine
-Firefox - SpiderMonkey (evolved from first JS Engine)
-Edge - Chakra
+- Chrome - V8 JS Engine
+- Firefox - SpiderMonkey (evolved from first JS Engine)
+- Edge - Chakra
 
 
 
@@ -1128,6 +1128,62 @@ Important Topics :
 - Inline Caching
 - Ahead of Time Compilation 
 - Garbage Collector (Orinoco)
+
+
+**setTimeout Trust Issues**
+
+
+```js
+console.log("Start")
+
+setTimeout(function cbT (){
+    console.log("callback function executed");
+},5000);
+
+
+console.log("End")
+
+
+let startDate = new Date().getTime();
+let endDate = startDate;
+
+while(endDate < startDate + 10000){
+    endDate = new Date().getTime();
+}
+
+console.log("10 seconds completed expires")
+```
+
+Output : 
+
+```
+Start
+End
+10 seconds completed expires
+callback function executed
+```
+
+
+
+```js
+
+
+console.log("Start")
+
+setTimeout(function cbT (){
+    console.log("callback function executed");
+},0);
+
+console.log("End")
+
+```
+
+Output : 
+```
+Start
+End
+callback function executed
+```
 
 **Higher Order functions**
 
@@ -1232,23 +1288,64 @@ console.log(radius.map(area))
 
 ```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Functions are very beautiful in javascipt
 
 
 Time tide and javascripts waits for none
+
+
+**map filter and reduce**
+
+
+```js
+const users = [
+    {firstName : "Rahul", lastName : "Kumar", age : 23},
+    {firstName : "Rohit", lastName : "Sharma", age : 25},
+    {firstName : "Virat", lastName : "Kohli", age : 30},
+    {firstName : "Sachin", lastName : "Tendulkar", age : 40},
+    {firstName : "Sourav", lastName : "Ganguly", age : 35},
+    {firstName : "MS", lastName : "Dhoni", age : 38},
+    {firstName : "Yuvraj", lastName : "Singh", age : 35},
+    {firstName : "Ravindra", lastName : "Jadeja", age : 33},
+    {firstName : "Hardik", lastName : "Pandya", age : 27},
+    {firstName : "Jasprit", lastName : "Bumrah", age : 26}
+]
+
+
+function getFullName(user){
+    return user.firstName + " " + user.lastName;
+}
+
+console.log(users.map(getFullName));
+
+
+function getAgeGreaterThan25(user){
+    return user.age > 25;
+}
+
+console.log(users.filter(getAgeGreaterThan25));
+
+function groupByAge(acc, curr){
+    if(acc[curr.age]){
+        acc[curr.age] = ++acc[curr.age];
+    }else{
+        acc[curr.age] = 1;
+    }
+    return acc;
+}
+
+console.log(users.reduce(groupByAge, {}));
+
+// Homework - Get name of people who have age less than 30 using reduce
+
+function getAgeLessThan30(acc, curr){
+    if(curr.age < 30){
+        acc.push(curr.firstName);
+    }
+    return acc;
+}
+
+console.log(users.reduce(getAgeLessThan30, []));
+
+
+```
