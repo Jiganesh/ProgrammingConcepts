@@ -1349,3 +1349,1027 @@ console.log(users.reduce(getAgeLessThan30, []));
 
 
 ```
+
+
+**Callback Hell**
+
+const cart = ["shoes", "pants", "kurta"]
+
+api.createOrder(cart, function () {
+    api.proceedToPayment(function () {
+        api.showOrderSummary(function () {
+            api.updateWallet()
+        })
+    })
+})
+
+// One callback inside another callback - Pyramid of Doom - Callback hell
+
+
+1. Callback HTMLElement - Code become unmaintainable
+2. Inversion of Control - We gave the control of our function to another function.
+
+
+
+
+**Promises**
+
+
+// Before Promises
+
+const cart = ["shoes", "pants", "kurta"]
+
+createOrder(cart, function (orderId) {
+    proceedToPayment(orderId);
+}) 
+
+In above example the createOrder function would call proceedToPayment whenever it has the data and whenever it wants to. We dont know if it call once, twice, thrice or not.
+
+
+// After Promises
+
+const promise = createOrder(cart);
+
+// {data : undefined}
+
+// after some time {data : orderDetails}
+
+promise.then(function (orderId)){
+    proceedToPayment(orderId)
+}
+
+In above example as soon as the promise object is filled with data it will automatically call proceedToPayment and we will have control of our code. Javascript offers 100% that this will be called once.
+
+
+```js
+const GITHUB_API = "https://api.github.com/users/jiganesh"
+
+const user = fetch(GITHUB_API)
+
+console.log(user)
+
+
+// Promise {<pending>}
+// [[Prototype]]: Promise
+// [[PromiseState]]: "fulfilled"
+// [[PromiseResult]]: Response
+
+// The reason why it logged {<pending>} is because when console.logs it was in pending state and when it was fulfilled the state of PromiseState was updated
+// The data will be in body as ReadableStream
+
+
+user.then(function(data) {
+    console.log(data)
+})
+
+
+```
+
+
+What will be the output ?
+
+
+
+```js
+const GITHUB_API = "https://api.github.com/users/jiganesh"
+
+const user = fetch(GITHUB_API)
+
+console.log(user)
+
+
+// Promise {<pending>}
+// [[Prototype]]: Promise
+// [[PromiseState]]: "fulfilled"
+// [[PromiseResult]]: Response
+
+// The reason why it logged {<pending>} is because when console.logs it was in pending state and when it was fulfilled the state of PromiseState was updated
+// The data will be in body as ReadableStream
+
+
+user.then(function(data) {
+    console.log(data)
+})
+
+console.log(user)
+
+```
+
+
+```
+Promise{<pending>}
+Promise{<pending>}
+Response // Line 97 was executed after 101 after promise was resolved
+```
+
+
+Promise Objects are immutable.
+
+Pending
+Fulfilled
+Rejected
+
+
+What is a promise in Javascript ?
+
+Promise is an object representing the eventual completion or failure of an asynchronous operation.
+
+
+
+
+
+
+
+
+
+```js
+
+const cart = ["shoes", "pants", "kurta"]
+
+createOrder(cart, function(orderId)){
+    proceedToPayment(orderId, function(paymentInfo){
+        showOrderSummary(paymentInfo, function(){
+            updateWalletBalance();
+        })
+    })
+}
+
+
+```
+
+Promise Chaining
+
+```js
+
+createOrder(cart)
+.then(function(orderId) {
+    return proceedToPayment(orderId)
+})
+.then(function(paymentInfo){
+    return showOrderSummary(paymentInfo)
+})
+.then(function (paymentInfo){
+    return updateWalletBalance(paymentInfo)
+})
+
+// Dont forget return 
+
+// can also be written as
+
+
+createOrder(cart)
+.then((orderId) => proceedToPayment(orderId))
+.then((paymentInfo) => howOrderSummary(paymentInfo))
+.then((paymentInfo) => updateWalletBalance(paymentInfo))
+
+```
+
+Explain what is Promise ?
+
+
+
+**Creating a Promise, Chaining and Error Handling**
+
+
+
+```js
+
+const cart = ["shoe", "pants", "kurta"]
+
+const promise = createOrder(cart) // orderId
+
+promise.then(function(orderId){
+      
+    console.log(orderId)  // "123456789" will be printed after 5 seconds
+})
+
+function createOrder(cart){
+    const promise = new Promise(function(resolve, reject){
+
+        // createOrder
+        // validateCart
+        // orderId
+
+        if (!validateCart(cart)){
+            const err = new Error ("Cart is not vaild")
+            reject(err)
+        }
+
+        const orderId = "123456789"
+
+        if (orderId){
+
+            setTimeout(function(){
+                resolve(orderId)
+            }, 5000)
+        }
+    })
+
+    return promise
+}
+
+function validateCart(cart){
+    return true
+}   
+```
+
+
+
+
+
+
+Reject promise
+
+
+```js
+
+const cart = ["shoe", "pants", "kurta"]
+
+const promise = createOrder(cart) // orderId
+
+promise.then(function(orderId){
+      
+    console.log(orderId)  // "123456789" will be printed after 5 seconds
+}).catch(function(err){  // handling promise
+    console.log(err.message)
+})
+
+function createOrder(cart){
+    const promise = new Promise(function(resolve, reject){
+
+        // createOrder
+        // validateCart
+        // orderId
+
+        if (!validateCart(cart)){
+            const err = new Error ("Cart is not vaild") 
+            reject(err)
+        }
+
+        const orderId = "123456789"
+
+        if (orderId){
+
+            setTimeout(function(){
+                resolve(orderId)
+            }, 5000)
+        }
+    })
+
+    return promise
+}
+
+function validateCart(cart){
+    return false
+}   
+```
+
+
+Promise Chaining
+
+```js
+
+// We can just resolve promise once. Attach failure callback function in catch to gracefully handle the errors. Any then after the catch will always be executed.
+
+const cart = ["shoe", "pants", "kurta"]
+
+createOrder(cart).then(function(orderId){
+    console.log(orderId)
+    return orderId  // "123456789" will be printed after 5 seconds
+}).then(function(orderId){
+    return proceedToPayment(orderId)
+}).then(function(paymentInfo){
+    console.log(paymentInfo)
+    return paymentInfo
+}).catch(function(err){  // handling promise
+    console.log(err.message)
+}).then(function(orderId){
+    console.log("No matter what happens, I will definitely be called")
+})
+
+function createOrder(cart){
+    const promise = new Promise(function(resolve, reject){
+
+        // createOrder
+        // validateCart
+        // orderId
+
+        if (!validateCart(cart)){
+            const err = new Error ("Cart is not vaild") 
+            reject(err)
+        }
+
+        const orderId = "123456789"
+
+        if (orderId){
+
+            setTimeout(function(){
+                resolve(orderId)
+            }, 2000)
+        }
+    })
+
+    return promise
+}
+
+function validateCart(cart){
+    return true
+}   
+
+function proceedToPayment(orderId){
+    return new Promise(function(resolve, reject){
+        resolve("Payment successful")
+    })
+}
+
+```
+
+Homework
+
+
+createOrder
+proceedToPayment
+showOrderSummary
+updateWallet
+
+
+**Async Await**
+
+
+- What is async ?
+- What is await ?
+- How async await works behind the scenes
+- Examples of using async/await
+- Error Handling
+- Interviews
+- Async Await vs Promise.then/.catch
+
+
+How async functions are created
+
+```js
+
+// always returns a promise, if not returned a promise then function will automatically wrap inside a promise and return a promise
+
+
+async function getData(){
+    return "Namaste";
+}
+
+const data = getData();
+console.log(date);
+
+```
+
+
+```
+Promise {<fulfilled>: 'Namaste'}
+[[Prototype]]: Promise
+[[PromiseState]]: "fulfilled"
+[[PromiseResult]]: "Namaste"
+
+```
+
+
+
+```js
+
+
+async function getData(){
+    return "Namaste";
+}
+
+const data = getData();
+console.log(data);
+
+
+data.then((value)=>{
+    console.log(value);
+})
+
+
+```
+
+```
+Promise {<fulfilled>: 'Namaste'}
+[[Prototype]]: Promise
+[[PromiseState]]: "fulfilled"
+[[PromiseResult]]: "Namaste"
+
+Namaste
+```
+
+
+
+```js
+
+async function getData(){
+    return new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            resolve("Jiganesh Promise");
+        },3000)
+    })
+}
+
+const data = getData();
+
+console.log(data);
+
+
+data.then((value)=>{
+    console.log(value);
+})
+
+
+```
+
+
+```
+
+Promise {<pending>}
+[[Prototype]]: Promise
+[[PromiseState]]: "fulfilled"
+[[PromiseResult]]: "Jiganesh Promise"
+
+Jiganesh Promise // after 3seconds
+```
+
+
+Resolving promises before async/await
+
+
+```js
+const promise = new Promise((resolve, reject) => {
+    resolve('Promise resolved value!')
+})
+
+function getData(){
+    p.then((res) => console.log(res)); // JS Engine will not wait for promise to resolve
+    console.log("Namaste Javascript")
+}
+
+getData()
+
+```
+
+
+```
+Namaste Javascript // printed immediately
+Promise resolved value!
+```
+
+Resolving promise using async/await
+
+```js
+
+const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve('Promise resolved value!')
+    }, 2000)
+})
+
+
+async function getData() {
+    const res = await promise // promise is registered in webapi environment resolve
+    console.log("Namaste Javascript") 
+    console.log(res)
+}
+
+
+// await is a keyword that can only be used inside an async function. It makes JavaScript wait until that promise settles and returns its result.
+
+// write await in front of promise to resolve the promise
+
+getData()
+
+```
+
+
+```
+Namaste Javascript // printed after 2 seconds
+Promise resolved value!
+```
+
+
+
+```js
+
+const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve('Promise resolved value!')
+    }, 2000)
+})
+
+
+async function getData() {
+    const res = await promise 
+    console.log("Namaste Javascript1") 
+    console.log(res)
+
+    const res = await promise 
+    console.log("Namaste Javascript2") 
+    console.log(res)
+}
+
+
+// await is a keyword that can only be used inside an async function. It makes JavaScript wait until that promise settles and returns its result.
+
+// write await in front of promise to resolve the promise
+
+getData()
+
+```
+
+
+```
+// everything is printed after 2 seconds
+NamasteJavascript1
+Promise resolved value!
+NamasteJavascript2
+Promise resolved value!
+```
+
+
+```js
+
+const promise1 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve('Promise resolved value1')
+    }, 10000)
+})
+
+const promise2 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve('Promise resolved value2')
+    }, 5000)
+})
+
+
+async function getData() {
+    const res = await promise1 // promise is registered in webapi environment 
+    console.log("Namaste Javascript1") 
+    console.log(res)
+
+    const res = await promise2 // promise is registered in webapi environment 
+    console.log("Namaste Javascript2") 
+    console.log(res)
+}
+
+
+
+getData()
+
+```
+
+
+```
+// everything is printed after 10 seconds
+NamasteJavascript1
+Promise resolved value1
+NamasteJavascript2
+Promise resolved value2
+```
+
+
+
+
+```js
+
+const promise1 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve('Promise resolved value1')
+    }, 5000)
+})
+
+const promise2 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve('Promise resolved value2')
+    }, 10000)
+})
+
+
+async function getData() {
+    const res = await promise1 // promise is registered in webapi environment
+    console.log("Namaste Javascript1") 
+    console.log(res)
+
+    const res = await promise2 // promise is registered in webapi environment
+    console.log("Namaste Javascript2") 
+    console.log(res)
+}
+
+
+
+getData()
+
+```
+
+
+```
+NamasteJavascript1 // After 5 seconds
+Promise resolved value1
+NamasteJavascript2 // After 10 seconds
+Promise resolved value2
+```
+
+
+- Empty callstack
+- Async p1 and p2 promises are registered
+- getData() will come inside callstack
+- at await p1 getData() (function execution) will be suspended from callstack
+- when p1 is resolved getData will again pushed in callstack and start execution from next line
+- at await p2 getData() (function execution) will be suspended from callstack
+- when p2 is resolved getData will again pushed in callstack and start execution from next line
+
+
+Javascript does not let callstack to be blocked
+
+
+
+```js
+
+
+const API_URL = "https://api.github.com/users/jiganesh"
+
+async function getGithubData (){
+    const data = await fetch(API_URL) // returns Response object
+    const jsonData = await data.json() // Readable Stream is again a promise
+    console.log(jsonData)
+}
+
+getGithubData()
+
+```
+
+
+```
+{
+    "login": "Jiganesh",
+    "id": 67581447,
+    "node_id": "MDQ6VXNlcjY3NTgxNDQ3",
+    "avatar_url": "https://avatars.githubusercontent.com/u/67581447?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/Jiganesh",
+    "html_url": "https://github.com/Jiganesh",
+    "followers_url": "https://api.github.com/users/Jiganesh/followers",
+    "following_url": "https://api.github.com/users/Jiganesh/following{/other_user}",
+    "gists_url": "https://api.github.com/users/Jiganesh/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/Jiganesh/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/Jiganesh/subscriptions",
+    "organizations_url": "https://api.github.com/users/Jiganesh/orgs",
+    "repos_url": "https://api.github.com/users/Jiganesh/repos",
+    "events_url": "https://api.github.com/users/Jiganesh/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/Jiganesh/received_events",
+    "type": "User",
+    "user_view_type": "public",
+    "site_admin": false,
+    "name": "Jiganesh Patil",
+    "company": null,
+    "blog": "",
+    "location": "India",
+    "email": null,
+    "hireable": null,
+    "bio": "Hello, Checkout 🤗High-On-DSA , my favourite and most 🌟starred repository. If you like it, make sure to drop a star. Have a good day.\r\n\r\n",
+    "twitter_username": "PatilJiganesh",
+    "public_repos": 49,
+    "public_gists": 1,
+    "followers": 631,
+    "following": 269,
+    "created_at": "2020-06-29T08:41:03Z",
+    "updated_at": "2024-12-15T01:37:07Z"
+}
+```
+
+
+Error Handling for async/await
+
+Approach 1
+
+```js
+const API_URL = "https://api.github.com/users/jiganeshwer"
+
+async function getGithubData (){
+
+    try{
+        const data = await fetch(API_URL) // returns Response object
+
+        if (data.status != 200){
+            throw new Error("Jiganesh something went wrong")
+        }
+
+        const jsonData = await data.json() // Readable Stream is again a promise
+        console.log(jsonData)
+    }catch(err){
+        console.log(err)
+    }
+
+}
+
+getGithubData()
+```
+
+
+Approach 2
+
+```js
+
+const API_URL = "https://api.github.com/users/jiganesh"
+
+async function getGithubData (){
+    const data = await fetch(API_URL) // returns Response object
+    const jsonData = await data.json() // Readable Stream is again a promise
+    console.log(jsonData)
+}
+
+getGithubData().catch((err) => console.log(err));
+
+```
+
+
+
+What should I use async/await or Promise.then/.catch ?
+
+
+async/await is syntactical sugar over promise.then/.catch. It is newer way of writing the code.
+
+
+
+**Promise APIs and Interview Questions**
+
+- Promise.all ([P1, P2, P3])  // Fail fast technique
+
+
+Case 1 : 
+
+P1 takes 3s settled
+P2 takes 1s settled
+P3 takes 2s settled
+
+after 3s returns [val1, val2, val3] it will make all calls parallelly but wait for all of them to finish
+
+Case 2 : 
+
+P1 takes 3s settled
+P2 takes 1s rejected
+P3 takes 2s settled
+
+as soon as any of the promises gets rejected it will throw error after 1s you will get an error. P1 and P3 will not be cancelled for parallel calls but error will be thrown after 1sec without waiting for them
+
+
+Case 3 : 
+
+P1 takes 3s settled
+P2 takes 1s settled
+P3 takes 2s rejected
+
+as soon as any of the promises gets rejected it will throw error after 2s you will get an error. P1 and P2 will not be cancelled for parallel calls but error will be thrown after 2sec without waiting for them
+
+
+
+
+Promise.allSettled ([P1, P2, P3])
+
+Case 1 : 
+
+P1 takes 3s settled
+P2 takes 1s settled
+P3 takes 2s settled
+
+after 3s returns [val1, val2, val3] it will make all calls parallelly but wait for all of them to finish
+
+
+Case 2 : 
+
+P1 takes 3s settled
+P2 takes 1s rejected
+P3 takes 2s settled
+
+it will wait for all promisses to be settled (not fulfilled as it means success) it means complete
+
+
+Promise.race  ([P1, P2, P3]) - returns result of first settled promise settled or error / rejected doesnt matter
+
+Case 1 : 
+
+P1 takes 3s settled
+P2 takes 1s settled
+P3 takes 2s settled
+
+after 1s returns (val2)
+
+it will return value of first settled promise
+
+
+case 2 : 
+
+
+P1 takes 3s settled
+P2 takes 5s settled
+P3 takes 2s rejected
+
+after 2s returns Error P3
+
+
+
+Promise.any ([P1, P2, P3]) - it will get first promise to settled
+
+Race with success - seeking for first success
+
+
+case 1 : 
+
+
+P1 takes 3s settled
+P2 takes 5s settled
+P3 takes 2s rejected
+
+after 3s returns Error P1
+
+
+case 2 : 
+
+
+P1 takes 3s rejected
+P2 takes 5s settled
+P3 takes 2s rejected
+
+after 5s returns Error P2
+
+
+
+case 3 : 
+
+
+P1 takes 3s rejected
+P2 takes 5s settled
+P3 takes 2s rejected
+
+after 5s returns list of all errors - AggregateError [err1, err2, err3]
+
+
+```js
+
+
+const p1 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve("p1 success");
+    }, 5000);
+});
+
+
+const p2 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve("p2 success");
+    }, 10000);
+});
+
+
+
+const p3 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve("p3 success");
+    }, 20000);
+});
+
+
+const p1_rejected = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        reject("p1 rejected");
+    }, 5000);
+});
+
+const p2_rejected = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        reject("p2 rejected");
+    }, 10000);
+});
+
+const p3_rejected = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        reject("p3 rejected");
+    }, 20000);
+});
+
+
+
+Promise.all([p1, p2, p3])
+    .then((result) => {
+        console.log(result); // ["p1 success","p2 success","p3 success"]
+    })
+    .catch((error) => {
+        console.log(error);
+    });
+
+Promise.all([p1_rejected, p2, p3])
+    .then((result) => {
+        console.log(result);
+    })
+    .catch((error) => {
+        console.log(error); // p1 rejected
+    });
+
+
+Promise.allSettled([p1, p2, p3])
+    .then((result) => {
+        console.log(result); 
+        /*[
+            {
+                "status": "fulfilled",
+                "value": "p1 success"
+            },
+            {
+                "status": "fulfilled",
+                "value": "p2 success"
+            },
+            {
+                "status": "fulfilled",
+                "value": "p3 success"
+            }
+        ]*/
+    })
+    .catch((error) => {
+        console.log(error);
+    });
+
+
+
+Promise.allSettled([p1_rejected, p2, p3])
+    .then((result) => {
+        console.log(result);
+        /*[
+            {
+                "status": "rejected",
+                "reason": "p1 rejected"
+            },
+            {
+                "status": "fulfilled",
+                "value": "p2 success"
+            },
+            {
+                "status": "fulfilled",
+                "value": "p3 success"
+            }
+        ]*/
+    })
+    .catch((error) => {
+        console.log(error);
+    });
+
+Promise.race([p1, p2, p3])
+    .then((result) => {
+        console.log(result);   // p1 success
+    })
+    .catch((error) => {
+        console.log(error);
+    });
+
+Promise.race([p1_rejected, p2, p3])
+    .then((result) => {
+        console.log(result);
+    })
+    .catch((error) => {
+        console.log(error); // p1 rejected
+    });
+
+Promise.race([p1_rejected, p2_rejected, p3_rejected])
+    .then((result) => {
+        console.log(result);
+    })
+    .catch((error) => {
+        console.log(error); // p1 rejected
+    });
+
+Promise.any([p1, p2, p3])
+    .then((result) => {
+        console.log(result); // p1 success
+    })
+    .catch((error) => {
+        console.log(error);
+    });
+
+Promise.any([p1_rejected, p2, p3])
+    .then((result) => {
+        console.log(result); // p2 success
+    })
+    .catch((error) => {
+        console.log(error);
+    });
+
+Promise.any([p1_rejected, p2_rejected, p3_rejected])
+    .then((result) => {
+        console.log(result);
+    })
+    .catch((error) => {
+        console.log(error); // AggregateError: All promises were rejected
+        console.log(error.errors);
+        /*
+        [
+            "p1 rejected",
+            "p2 rejected",
+            "p3 rejected"
+        ]
+        */
+    });
+
+```
+
