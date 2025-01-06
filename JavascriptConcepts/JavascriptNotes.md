@@ -489,7 +489,7 @@ Uncaught TypeError: Assignment to constant variable at index.js:6
 
 How to avoid temporal deadzone ?
 
-Initialize at top
+>Initialize at top
 
 
 
@@ -639,10 +639,10 @@ f y(){
 }
 ```
 
-now x() execution context is gone, nothing is there what will z() print
+now x( ) execution context is gone, nothing is there what will z( ) print
 
 
-Z will rememeber its lexical scope as not only the funtion was returned but clousure was returned.
+Z will rememeber its lexical scope as not only the funtion was returned but closure was returned.
 
 
 
@@ -700,7 +700,7 @@ z();
 ```
 
 
-Where are clousure used ?
+Where are closure used ?
 
 - Module design pattern
 - currying in Js
@@ -719,7 +719,7 @@ Where are clousure used ?
 
 function x(){
     var i = 1;
-    setTimeout(fucntion(){ //program does not wait it will work on next line
+    setTimeout(function(){ //program does not wait it will work on next line
         console.log(i);
     }, 1000);
 
@@ -838,8 +838,9 @@ counter2();
 counter2();
 ```
 
+Can you make above code scalable ?
 
-Constructor
+Yes we can use Constructor
 
 
 ```js
@@ -859,29 +860,24 @@ function Counter (){
 
 var counter1 = new Counter();
 
-counter1.increamentCounter();
-counter1.increamentCounter();
+counter1.incrementCounter();
+counter1.incrementCounter();
 counter1.decrementCounter();
 
 ```
 
 
-Disadvantages of closure
+Disadvantages of closure :
 
 
 Over consumption of memory
 
 Not garbage collected
 
-Freeze browser
-
+if not handled properly browser freeze
 
 
 Garbage collector in JS whenever there is unused variable it removes these variable. relation between garbage collector and closure - 
-
-
-
-
 
 
 ```js
@@ -894,7 +890,7 @@ function a (){
 }
 ```
 
-var y = a();
+var y = a( );
 
 
 x memory cannot be freed unless y is used, some modern browser have check if variable is not reached and unused then they are smartly removed from memory
@@ -1101,9 +1097,37 @@ Recapping GEC is created while running a program and it is put inside the callst
 setTimeout is not part of Javascript
 
 
-setTimeout, DOM APIs - document.etc , fetch(), localStorage, console from console.log, location is not part of Javascript they are Web API's in browsers. They are powers from browsers
+setTimeout, DOM APIs - `document.` etc , fetch(), localStorage, console from console.log, location is not part of Javascript they are Web API's in browsers. They are powers from browsers
 
 
+![alt](event_loop.png)
+
+
+
+**Javascript Exposed**
+
+Chrome - V8 JS Engine
+Firefox - SpiderMonkey (evolved from first JS Engine)
+Edge - Chakra
+
+
+
+![alt text](JSEngine.png)
+
+
+
+![alt text](execution.png)
+
+
+Important Topics : 
+
+- Just In Time Compilation
+- Mark and Sweep Algorithm
+- Inlining
+- Copy Elision
+- Inline Caching
+- Ahead of Time Compilation 
+- Garbage Collector (Orinoco)
 
 **Higher Order functions**
 
@@ -1171,9 +1195,42 @@ const calculate = function (radius, logic){
     return output
 }
 
+calculate(radius, area)
+
 ```
 
+Polyfill for map
 
+```js
+
+const radius = [3, 1, 2, 4]
+
+
+const area = function (radius){
+    return Math.PI * radius  * radius
+}
+
+
+const circumference = function (radius){
+    return 2 * Math.PI * radius
+}
+
+const diameter = function (radius){
+    return 2 * radius
+}
+ 
+Array.prototype.calculate = function (radius, logic){
+    const output = []
+    for ( let  i = 0;  i < radius.length ; i++){
+        output.push(logic(radius[i]))
+    }
+    return output
+}
+
+console.log(radius.calculate(area)) //similar to
+console.log(radius.map(area)) 
+
+```
 
 
 
