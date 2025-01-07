@@ -1,9 +1,10 @@
+
+
+Javascript is weakly typed, synchronous single threaded language. 
+
 Everything in javascript happens inside an execution context
 
-Javascript is weakly typed, synchronous single threaded language
-
-
-==Execution Context==  has two components
+_Execution Context_ has two components
 
 |Memory | Code|
 |----|---|
@@ -15,16 +16,14 @@ Javascript is weakly typed, synchronous single threaded language
 
 
 
- Memory Component - Variable environment 
+Memory Component also known as Variable environment 
 
-code component - thread of execution
-
-
-What happens when you run Javascript Code ?
+Code Component also known as Thread of Execution
 
 
-Everything in Javascript happens inside an execution context.
+**Question** : What happens when you run Javascript Code ?
 
+As mentioned above everything in Javascript happens inside an execution context. When you run the code, an execution context is created with memory component and code component. Let's consider Javascript code below
 
 
 ```js
@@ -38,8 +37,7 @@ var square2 = square(2)
 var square4 = square(4)
 ```
 
-
-When you run the code a execution context is created with memory component and code component. It is created in two phase 
+The execution happens as follows : 
 
 1 Memory creation phase : Javascript will allocate memory to all the variable and functions
 
@@ -153,12 +151,12 @@ JS Engine handles everything to manage everything this creation and deletion of 
 When execution context is created it will be pushed into the stack and when it is completed it will be deleted from the stack. After the whole program is executed the call stack becomes empty.
 
 
-Call Stack maintains the order of execution of execution contexts
+Callstack maintains the order of execution of execution contexts
 
 
-Call stack is also known by 
+Callstack is also known by 
 
-0. Call stack
+0. Callstack
 1. Execution Context Stack
 2. Program Stack
 3. Control Stack
@@ -167,9 +165,12 @@ Call stack is also known by
 
 
 
+**Question** : What is Hoisting in Javascript ?
 
-Hoisting in Javascript : Hoisting is JavaScript's default behavior of moving declarations to the top.
+Hoisting is JavaScript's default behavior of moving declarations to top of their scope, prior to execution of the code. 
 
+
+Hoisting Code Snippet 1 :
 ```js
 var x = 7;
 
@@ -181,12 +182,14 @@ getName();
 console.log(x);
 
 ```
-
+Output : 
 ```
 Namaste Javascript
 7
 ```
 
+Hoisting Code Snippet 2 :
+
 ```js
 var x = 7;
 
@@ -197,12 +200,15 @@ function getName(){
     console.log("Namaste Javascript");
 }
 ```
+Output : 
 
 ```
 Namaste Javascript
 undefined
 ```
 
+Hoisting Code Snippet 3 :
+
 ```js
 
 getName();
@@ -212,13 +218,13 @@ function getName(){
     console.log("Namaste Javascript");
 }
 ```
-
+Output : 
 ```
 Namaste Javascript
 Uncaught ReferenceError: x is not defined at index.js:3
 ```
 
-
+Hoisting Code Snippet 4 :
 ```js
 
 console.log(getName);
@@ -227,13 +233,14 @@ function getName(){
     console.log("Namaste Javascript");
 }
 ```
-
+Output : 
 ```
 f getName(){
     console.log("Namaste Javascript");
 }
 ```
 
+Hoisting Code Snippet 5 :
 
 ```js
 
@@ -251,7 +258,13 @@ var getName2 = function(){
 ```
 
 
+
+/////////////////////////////////////////////////// complete
+
 **Functions in Javascript**
+
+
+Functions Code Snippet 1 : 
 
 ```js
 
@@ -274,6 +287,7 @@ function b (){
 
 ```
 
+Output : 
 
 ```
 10
