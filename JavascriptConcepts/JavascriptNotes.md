@@ -1,24 +1,29 @@
 
 
-Javascript is weakly typed, synchronous single threaded language. 
+JavaScript is a weakly-typed synchronous single-threaded language.
 
-Everything in javascript happens inside an execution context
+- Weakly typed language : JavaScript is a weakly typed language. It recognizes different data types (numbers, strings, etc.), but doesn't use them too strictly, trying to convert data when it seems reasonable
+- Synchronous: It executes one command at a time in a specific order.
+- Single-threaded: It can only execute one command at a time. It proceeds to the next line only when the current line has finished executing.
+
+
+Everything in javascript happens inside an execution context. The execution context is like a big box or container where the JavaScript code is executed.
 
 _Execution Context_ has two components
 
-|Memory | Code|
+|Memory Component | Code Component|
 |----|---|
-|key : value| - code execution
-|a : 10| - code execution
-|fn : {....}| - code execution
+|a : undefined|
+|| code execution a = 10
+|a : 10| 
+|fn : {....}| 
 
 
+Memory Component also known as Variable environment. Variables and functions are stored in the memory component as key-value pairs.
+
+Code Component also known as Thread of Execution. The code component is where the JavaScript code is executed line by line.
 
 
-
-Memory Component also known as Variable environment 
-
-Code Component also known as Thread of Execution
 
 
 **Question** : What happens when you run Javascript Code ?
@@ -137,21 +142,21 @@ JS Engine handles everything to manage everything this creation and deletion of 
 
 |Call stack|
 |---|
-|Execution Context for 2|
+|Execution Context for square(2)|
 |Global Execution Context|
 
 
 
 |Call stack|
 |---|
-|Execution Context for 4|
+|Execution Context for square(4)|
 |Global Execution Context|
 
+return statements return control to the invoking context. Return values are stored in memory if they have to be  stored in variable.
 
-When execution context is created it will be pushed into the stack and when it is completed it will be deleted from the stack. After the whole program is executed the call stack becomes empty.
+When execution context is created it will be pushed into the stack, each execution context has its own memory component and code component and when it is completed it will be deleted from the stack. After the whole program is executed the call stack becomes empty.
 
-
-Callstack maintains the order of execution of execution contexts
+Callstack maintains the order of execution of execution contexts. The topmost execution context is the one currently being executed. The bottom execution context is the Global Execution Context and others are Function EC.
 
 
 Callstack is also known by 
@@ -258,9 +263,6 @@ var getName2 = function(){
 ```
 
 
-
-/////////////////////////////////////////////////// complete
-
 **Functions in Javascript**
 
 
@@ -347,9 +349,10 @@ Global Execution Context deleted
 
 
 
-
 **Shortest Javascript Program**
 
+
+Empty JS File is the shortest Javascript Program
 
 index.js 
 ```js
@@ -1360,7 +1363,6 @@ function getAgeLessThan30(acc, curr){
 }
 
 console.log(users.reduce(getAgeLessThan30, []));
-
 
 ```
 
