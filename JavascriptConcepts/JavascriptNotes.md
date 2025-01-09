@@ -16,7 +16,7 @@ _Execution Context_ has two components
 |a : undefined|
 || code execution a = 10
 |a : 10| 
-|fn : {....}| 
+|fn : {.....}| 
 
 
 Memory Component also known as Variable environment. Variables and functions are stored in the memory component as key-value pairs.
