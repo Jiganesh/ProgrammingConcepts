@@ -131,7 +131,7 @@ Memory| Code execution |
     |return ans which finds ans from current memory <br> and return back to the execution context where it is invoked|
 
 | Memory | Code |
-|----| ---- |
+|----| ---- | 
 |n : 2||
 |square : {...}|
 |square2 : 4 - entire execution context for function invocation will be deleted|
