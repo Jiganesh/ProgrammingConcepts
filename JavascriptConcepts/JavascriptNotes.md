@@ -123,7 +123,7 @@ Memory| Code execution |
 
     |Memory| 
     |---|
-    |num : 2|
+    |num : 2| 
     |ans : 16|
 
     |Code execution|
