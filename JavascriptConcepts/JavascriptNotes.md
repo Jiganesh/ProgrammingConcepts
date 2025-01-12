@@ -115,7 +115,7 @@ Memory| Code execution |
     |Memory| 
     |---|
     |num : 4|
-    |ans : undefined|
+    |ans : undefined| 
 
     |Code execution|
     |---|
