@@ -115,7 +115,7 @@ Memory| Code execution |
     |Memory| 
     |---|
     |num : 4|
-    |ans : undefined| 
+    |ans : undefined|
 
     |Code execution|
     |---|
@@ -172,7 +172,7 @@ Callstack is also known by
 
 **Question** : What is Hoisting in Javascript ?
 
-Hoisting is JavaScript's default behavior of moving declarations to top of their scope, prior to execution of the code. 
+Hoisting is a concept in JavaScript that allows variables and function declarations to be accessed before they are actually defined in the code. During the memory creation phase of the execution context, variables are initialized to undefined, while function declarations are stored in memory as they are.
 
 
 Hoisting Code Snippet 1 :
