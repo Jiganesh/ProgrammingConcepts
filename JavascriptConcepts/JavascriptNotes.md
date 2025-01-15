@@ -9,7 +9,7 @@ JavaScript is a weakly-typed synchronous single-threaded language.
 
 Everything in javascript happens inside an execution context. The execution context is like a big box or container where the JavaScript code is executed.
 
-_Execution Context_ has two components
+_Execution Context_ has two components 
 
 |Memory Component | Code Component|
 |----|---|
