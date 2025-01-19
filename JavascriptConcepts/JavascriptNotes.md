@@ -152,11 +152,11 @@ JS Engine handles everything to manage everything this creation and deletion of 
 |Execution Context for square(4)|
 |Global Execution Context|
 
-return statements return control to the invoking context. Return values are stored in memory if they have to be  stored in variable.
+"return statements" return control to the invoking context. Return values are stored in memory if they have to be  stored in variable.
 
 When execution context is created it will be pushed into the stack, each execution context has its own memory component and code component and when it is completed it will be deleted from the stack. After the whole program is executed the call stack becomes empty.
 
-Callstack maintains the order of execution of execution contexts. The topmost execution context is the one currently being executed. The bottom execution context is the Global Execution Context and others are Function EC.
+Callstack maintains the order of execution of execution contexts. The topmost execution context is the one currently being executed. The bottom execution context is the Global Execution Context and others are Function Execution Contexts.
 
 
 Callstack is also known by 
@@ -173,6 +173,8 @@ Callstack is also known by
 **Question** : What is Hoisting in Javascript ?
 
 Hoisting is a concept in JavaScript that allows variables and function declarations to be accessed before they are actually defined in the code. During the memory creation phase of the execution context, variables are initialized to undefined, while function declarations are stored in memory as they are.
+
+Hoisting works differently for function declarations, function expressions and arrow function expression. Function declarations are fully hoisted, while function expressions and arrow function expression behave like variables and are hoisted with an initial value of undefined.
 
 
 Hoisting Code Snippet 1 :
@@ -266,6 +268,15 @@ var getName2 = function(){
 **Functions in Javascript**
 
 
+**Question** What are functions in Javascript and How are they executed ?
+
+Functions in JavaScript create their own execution contexts when invoked.
+
+Each function has its own variable environment (Memory Component), allowing the use of local variables that are scoped within the function.
+
+Variables declared within a function are accessible only within that function, unless explicitly returned or accessed from an outer scope (concept of closures)
+
+
 Functions Code Snippet 1 : 
 
 ```js
@@ -354,6 +365,8 @@ Global Execution Context deleted
 
 Empty JS File is the shortest Javascript Program
 
+Shortest Javascript code Snippet 1:
+
 index.js 
 ```js
 
@@ -361,15 +374,29 @@ index.js
 ```
 
 
-windown - is global object which is created with gec along with gec this is created.
+
+The shortest JavaScript program is an empty file. Although there is no code to execute, the JavaScript engine performs several tasks behind the scenes.
+
+A global execution context is created, and the global memory component (variable environment) is set up.
+
+The JavaScript engine creates a global object called "Window" in the browser environment, which contains various functions and variables.
+
+The global object can be accessed using the Window keyword or this keyword at the global level (or At global level, this === window).
+
+If we create any variable in the global scope, then the variables get attached to the global object.
+
+In different JavaScript Runtime Environments, the global object may have different names (e.g., window in browsers, global in Node. js).
+
+
+window - is global object which is created with Global Memory Component along with Global Execution Context this is created.
 
 
 this === window > true in global execution context 
 
 
-so does that mean this and window is same ?
+**Question** Does that mean this and window is same ?
 
-this and window are not the same thing. Depending on context, this can refer to any number of elements, while window always means window.
+this and window are not the same thing. Depending on context, this can refer to any object, while window always means window.
 
 
 ```js
@@ -383,12 +410,44 @@ console.log(this.a);
 
 **undefined and not defined**
 
+
+**Question** What is different between undefined and not defined ? 
+- undefined means that memory has been allocated to a variable but no value has been assigned yet.
+- not defined refers to a variable that has not been declared or allocated any memory.
+
 > var a = undefined (fine but not a good practice)
+
+
+undefined vs not defined Code Snippet 1
+
+```js
+
+// Example 1
+var a; // Memory is allocated for 'a', but no value is assigned yet
+console.log(a); // Output: undefined
+
+// Example 2
+var x;
+console.log(x); // Output: undefined
+
+// Example 3
+console.log(y); // Output: ReferenceError: y is not defined
+
+```
+
+
+undefined vs Empty
+
+- undefined is not equivalent to empty or null.
+- It is a special keyword in JavaScript that takes up its own memory space.
+- undefined is a placeholder until a value is assigned to a variable.
 
 
 **The scope chain, Scope and Lexical Environment**
 
-Lexical Environment is created when EC is created
+Scope in Javascript is directly related to Lexical Environment.
+
+Lexical Environment is created when Execution Context is created
 Lexical Environment = Local Memory + Lexical Environment of Parent
 
 Whole chain of Lexical Environment is SCOPE CHAIN
