@@ -1,4 +1,4 @@
-
+# How Javascript Works ? 
 
 JavaScript is a weakly-typed synchronous single-threaded language.
 
@@ -24,9 +24,7 @@ Memory Component also known as Variable environment. Variables and functions are
 Code Component also known as Thread of Execution. The code component is where the JavaScript code is executed line by line.
 
 
-
-
-**Question** : What happens when you run Javascript Code ?
+# How Javascript Code is executed ? 
 
 As mentioned above everything in Javascript happens inside an execution context. When you run the code, an execution context is created with memory component and code component. Let's consider Javascript code below
 
@@ -170,7 +168,7 @@ Callstack is also known by
 
 
 
-**Question** : What is Hoisting in Javascript ?
+# What is Hoisting in Javascript ?
 
 Hoisting is a concept in JavaScript that allows variables and function declarations to be accessed before they are actually defined in the code. During the memory creation phase of the execution context, variables are initialized to undefined, while function declarations are stored in memory as they are.
 
@@ -265,7 +263,7 @@ var getName2 = function(){
 ```
 
 
-**Functions in Javascript**
+# Functions in Javascript
 
 
 **Question** What are functions in Javascript and How are they executed ?
@@ -360,7 +358,7 @@ Global Execution Context deleted
 
 
 
-**Shortest Javascript Program**
+# Shortest Javascript Program
 
 
 Empty JS File is the shortest Javascript Program
@@ -408,7 +406,7 @@ console.log(this.a);
 
 ```
 
-**undefined and not defined**
+# undefined and not defined
 
 
 **Question** What is different between undefined and not defined ? 
@@ -443,18 +441,29 @@ undefined vs Empty
 - undefined is a placeholder until a value is assigned to a variable.
 
 
-**The scope chain, Scope and Lexical Environment**
+# The Scope and Lexical Environment and Scope Chain
 
-Scope in Javascript is directly related to Lexical Environment.
 
-Lexical Environment is created when Execution Context is created
+**Question** What is Scope, Lexical Environment and Scope Chain.
+
+Scope refers to current context of code which determines the accessibility of variables to Javascript.
+
+Lexical means In hierarchy, In order
+
+Lexical Environment is created when Execution Context is created and is referenced in local execution context (in memory space)
+
+
 Lexical Environment = Local Memory + Lexical Environment of Parent
 
 Whole chain of Lexical Environment is SCOPE CHAIN
 
-![alt text](scope_chain.png)
 
 
+![](scope_chain.png)
+
+
+
+Scope, Lexical Environment and Scope Chain Code Snippet 1 : 
 
 ```js
 function a(){
@@ -472,11 +481,27 @@ a();
 ```
 
 
+Lexical or Static scope refers to the accessibility of variables, functions and object based on physical location in source code.
 
-**let and const in JS**
+
+```
+Global {
+    Outer {
+        Inner
+    }
+}
+// Inner is surrounded by lexical scope of Outer
+```
+
+An inner function can access variables which are in outer functions even if inner function is nested deep. In any other case, a function can't access variables not in its scope.
+
+
+# let and const in JS
 
 
 let and const are hoisted. 
+
+Let and Const Code snippet 1 : 
 
 ```js
 console.log(a)
@@ -493,6 +518,9 @@ Memory is assigned to var declaration and this var was attached to the global ob
 
 Temporal dead zone is time from when let variable was hoisted and when it was initialized.
 
+
+Let and Const Code Snippet 2 
+
 ```js
 console.log(x)
 
@@ -504,6 +532,7 @@ Uncaught ReferenceError: x is not defined index.js:1
 ```
 
 
+Let and Const Code Snippet 3
 
 
 ```js
@@ -515,6 +544,8 @@ let a  = 100
 ```
 Uncaught SyntaxError : Identified 'a' has already been declared
 ```
+
+Let and Const Code Snippet 4 
 
 
 ```js
@@ -534,6 +565,8 @@ In let you can initialize after but in const you have to initialize it while dec
 In let you cannot re-declare and in const you cannot re-initialize it
 
 
+Let and Const Code Snippet 5
+
 ```js
 
 let a;
@@ -550,6 +583,9 @@ console.log(a);
 ```
 Uncaught SyntaxError: Missing Initializer in const declaration
 ```
+
+
+Let and Const Code Snippet 6
 
 ```js
 
@@ -569,7 +605,7 @@ How to avoid temporal deadzone ?
 
 
 
-**Block Scope and Shadowing in JS**
+# Block Scope and Shadowing in JS
 
 
 
