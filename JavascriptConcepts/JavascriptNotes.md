@@ -1,4 +1,4 @@
-# How Javascript Works ? 
+<details><summary>How Javascript Works and How Javascript Code is executed ?</summary>
 
 JavaScript is a weakly-typed synchronous single-threaded language.
 
@@ -22,9 +22,6 @@ _Execution Context_ has two components
 Memory Component also known as Variable environment. Variables and functions are stored in the memory component as key-value pairs.
 
 Code Component also known as Thread of Execution. The code component is where the JavaScript code is executed line by line.
-
-
-# How Javascript Code is executed ? 
 
 As mentioned above everything in Javascript happens inside an execution context. When you run the code, an execution context is created with memory component and code component. Let's consider Javascript code below
 
@@ -166,9 +163,12 @@ Callstack is also known by
 4. Runtime Stack
 5. Machine stack
 
+</details>
 
 
-# What is Hoisting in Javascript ?
+<details><summary>What is Hoisting in Javascript ?</summary>
+
+
 
 Hoisting is a concept in JavaScript that allows variables and function declarations to be accessed before they are actually defined in the code. During the memory creation phase of the execution context, variables are initialized to undefined, while function declarations are stored in memory as they are.
 
@@ -262,8 +262,19 @@ var getName2 = function(){
 
 ```
 
+</details>
 
-# Functions in Javascript
+
+
+
+
+
+
+<details><summary>What are functions in Javscript</summary>
+
+
+
+Functions in Javascript
 
 
 **Question** What are functions in Javascript and How are they executed ?
@@ -358,7 +369,19 @@ Global Execution Context deleted
 
 
 
-# Shortest Javascript Program
+
+</details>
+
+
+
+
+
+
+
+
+
+
+<details><summary>shortest Javascript Program</summary>
 
 
 Empty JS File is the shortest Javascript Program
@@ -406,7 +429,14 @@ console.log(this.a);
 
 ```
 
-# undefined and not defined
+
+</details>
+
+
+
+
+<details><summary>undefined and not defined</summary>
+
 
 
 **Question** What is different between undefined and not defined ? 
@@ -441,7 +471,19 @@ undefined vs Empty
 - undefined is a placeholder until a value is assigned to a variable.
 
 
-# The Scope and Lexical Environment and Scope Chain
+</details>
+
+
+
+
+
+
+
+
+
+
+<details><summary>The Scope and Lexical Environment and Scope Chain</summary>
+
 
 
 **Question** What is Scope, Lexical Environment and Scope Chain.
@@ -605,7 +647,12 @@ How to avoid temporal deadzone ?
 
 
 
-# Block Scope and Shadowing in JS
+
+</details>
+
+
+
+<details><summary>Block Scope and Shadowing in JS</summary>
 
 
 
@@ -708,6 +755,11 @@ function x(){
 }
 
 ```
+
+</details>
+
+
+
 
 
 **Closures**
