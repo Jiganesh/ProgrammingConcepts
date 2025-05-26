@@ -1,8 +1,8 @@
 **Horizontal Scaling** - Adding new machines to cope with computational demands
--Example : A Diner is always crowded, to satisfy customer demand they open different Diner Franchise to serve.
+- Example : A Diner is always crowded, to satisfy customer demand they open different Diner Franchise to serve.
 
 **Vertical Scaling** - Adding resources to existing machine to cope with computational demands.
-Example : A Diner is always crowded, to serve the customers you hire more servers and chefs.
+- Example : A Diner is always crowded, to serve the customers you hire more servers and chefs.
 
 
 **Throttling** - Technique to control the rate at which API requests are processed.
