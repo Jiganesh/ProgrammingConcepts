@@ -9,7 +9,7 @@
 **Master-Slave Architecture** - A computational model / design pattern for distributed systems where master node coordinates and controls slave nodes.
 - Example : A Diner has head chef (master), due to unforeseen circumstances he was not able to work. You can bring a backup chef (slave), where head chef can instruct and backup chef can execute his tasks.
 
-**Load Balancer** - device or service that distributes network traffic dynamically across resources
+**Load Balancer** - A device or service that distributes network traffic dynamically across resources
 - Example : A Diner has two head chefs. Giving all orders to single chef would not be efficient. The manager (Load Balancer) gives half orders to chef1 and half orders to chef2
 
 
