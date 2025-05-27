@@ -4,8 +4,6 @@
 **Vertical Scaling** - Adding resources to existing machine to cope with computational demands.
 - Example : A Diner is always crowded, to serve the customers you hire more servers and chefs.
 
-
-
 **Master-Slave Architecture** - A computational model / design pattern for distributed systems where master node coordinates and controls slave nodes.
 - Example : A Diner has head chef (master), due to unforeseen circumstances he was not able to work. You can bring a backup chef (slave), where head chef can instruct and backup chef can execute his tasks.
 
