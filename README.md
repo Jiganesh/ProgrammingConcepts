@@ -16,3 +16,6 @@
 
 **Rate Limiting** - Technique to restrict API requests a client can make.
 - Example : A Diner has three table, with 5 people in queue if one person asks for two tables - he will be told that he can only reserve one table and other 2 people will be let in.
+
+
+**JSON Web Token (JWT)**  - Self-contained, stateless tokens that carry all the necessary information for authentication and authorization within the token itself
