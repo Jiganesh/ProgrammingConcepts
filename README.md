@@ -19,4 +19,4 @@
 
 
 **JSON Web Token (JWT)**  - Self-contained, stateless tokens that carry all the necessary information for authentication and authorization within the token itself. It consists of Header, Payload and Signature
-- Example : A Diner has chefs and servers, only chefs have access to kitchen. The entry to the chef is only permitted if manager allows to guard. Instead of chef having to call manager to let him in. Manager provides him a badge which can be shown to guard to let him in the kitchen
+- Example : A Diner has chefs and servers, only chefs have access to kitchen. The entry to the chef is only permitted if manager allows after notifying guard. Instead of chef having to call manager to let him in. Manager provides him a badge which can be shown to guard to let him in the kitchen.
