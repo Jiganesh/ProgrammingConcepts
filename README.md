@@ -1,3 +1,6 @@
+## Running a restaurant is harder than System Design 
+
+
 **Horizontal Scaling** - Adding new machines to cope with computational demands
 - Example : A Diner is always crowded, to satisfy customer demand they open different Diner Franchise to serve.
 
@@ -18,5 +21,4 @@
 - Example : A Diner has three table, with 5 people in queue if one person asks for two tables - he will be told that he can only reserve one table and other 2 people will be let in.
 
 
-**JSON Web Token (JWT)**  - Self-contained, stateless tokens that carry all the necessary information for authentication and authorization within the token itself. It consists of Header, Payload and Signature
-- Example : A Diner has chefs and servers, only chefs have access to kitchen. The entry to the chef is only permitted if manager allows after notifying guard. Instead of chef having to call manager to let him in. Manager provides him a badge which can be shown to guard to let him in the kitchen.
+**JSON Web Token (JWT)**  - Self-contained, stateless tokens that carry all the necessary information for authentication and authorization within the token itself
