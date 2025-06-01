@@ -1,4 +1,4 @@
-<details><summary>How Javascript Works and How Javascript Code is executed ?</summary>
+**How Javascript Works and How Javascript Code is executed ?**
 
 JavaScript is a weakly-typed synchronous single-threaded language.
 
@@ -9,7 +9,7 @@ JavaScript is a weakly-typed synchronous single-threaded language.
 
 Everything in javascript happens inside an execution context. The execution context is like a big box or container where the JavaScript code is executed.
 
-_Execution Context_ has two components 
+Execution Context has two components 
 
 |Memory Component | Code Component|
 |----|---|
@@ -163,10 +163,10 @@ Callstack is also known by
 4. Runtime Stack
 5. Machine stack
 
-</details>
 
 
-<details><summary>What is Hoisting in Javascript ?</summary>
+
+**What is Hoisting in Javascript ?**
 
 
 
@@ -262,15 +262,8 @@ var getName2 = function(){
 
 ```
 
-</details>
 
-
-
-
-
-
-
-<details><summary>What are functions in Javscript</summary>
+**What are functions in Javscript**
 
 
 
@@ -430,14 +423,6 @@ console.log(this.a);
 ```
 
 
-</details>
-
-
-
-
-<details><summary>undefined and not defined</summary>
-
-
 
 **Question** What is different between undefined and not defined ? 
 - undefined means that memory has been allocated to a variable but no value has been assigned yet.
@@ -469,21 +454,6 @@ undefined vs Empty
 - undefined is not equivalent to empty or null.
 - It is a special keyword in JavaScript that takes up its own memory space.
 - undefined is a placeholder until a value is assigned to a variable.
-
-
-</details>
-
-
-
-
-
-
-
-
-
-
-<details><summary>The Scope and Lexical Environment and Scope Chain</summary>
-
 
 
 **Question** What is Scope, Lexical Environment and Scope Chain.
@@ -647,15 +617,7 @@ How to avoid temporal deadzone ?
 
 
 
-
-</details>
-
-
-
-<details><summary>Block Scope and Shadowing in JS</summary>
-
-
-
+**Block Scope and Shadowing in JS**
 
 Block is defined by curly braces. Block is also known as compound statement. We group multiple statements in a block where js expects one one statment.
 
@@ -755,11 +717,6 @@ function x(){
 }
 
 ```
-
-</details>
-
-
-
 
 
 **Closures**
@@ -878,6 +835,7 @@ Where are closure used ?
 
 
 **setTimeout + Closures Interview Questions**
+
 ```js
 // Javascript waits for none
 
