@@ -30,6 +30,6 @@
 - Example : A Diner will only authorize its staff members (authorized users) to access kitchen
 
 **JSON Web Token (JWT)**  - Self-contained, stateless tokens that carry all the necessary information for authentication and authorization within the token itself.
-- Example : Diner has to authenticate its staff and staff can access kitchen. The guard cannot allow unauthenticated staff. To avoid redundant authentication, staff is provided a badge (JWT) which allows them to access kitchen instead of going to authentication process everyday.
+- Example : Diner has to authenticate its staff and staff can access kitchen. The guard cannot allow unauthenticated staff. To avoid redundant authentication, staff is provided a badge (JWT) which allows them to access kitchen instead of going through authentication process everyday.
 
 
