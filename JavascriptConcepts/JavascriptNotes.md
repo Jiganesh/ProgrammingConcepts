@@ -1,4 +1,4 @@
-**How Javascript Works and How Javascript Code is executed ?**
+**How Javascript works and How Javascript Code is executed ?**
 
 JavaScript is a weakly-typed synchronous single-threaded language.
 
@@ -6,10 +6,9 @@ JavaScript is a weakly-typed synchronous single-threaded language.
 - Synchronous: It executes one command at a time in a specific order.
 - Single-threaded: It can only execute one command at a time. It proceeds to the next line only when the current line has finished executing.
 
-
 Everything in javascript happens inside an execution context. The execution context is like a big box or container where the JavaScript code is executed.
 
-Execution Context has two components 
+Execution Context has two components :
 
 |Memory Component | Code Component|
 |----|---|
@@ -25,6 +24,8 @@ Code Component also known as Thread of Execution. The code component is where th
 
 As mentioned above everything in Javascript happens inside an execution context. When you run the code, an execution context is created with memory component and code component. Let's consider Javascript code below
 
+
+JS Fundamental Code Snippet 1 : 
 
 ```js
 var n = 2;
@@ -125,6 +126,7 @@ Memory| Code execution |
     |---|
     |return ans which finds ans from current memory <br> and return back to the execution context where it is invoked|
 
+
 | Memory | Code |
 |----| ---- | 
 |n : 2||
@@ -164,11 +166,7 @@ Callstack is also known by
 5. Machine stack
 
 
-
-
 **What is Hoisting in Javascript ?**
-
-
 
 Hoisting is a concept in JavaScript that allows variables and function declarations to be accessed before they are actually defined in the code. During the memory creation phase of the execution context, variables are initialized to undefined, while function declarations are stored in memory as they are.
 
@@ -176,6 +174,7 @@ Hoisting works differently for function declarations, function expressions and a
 
 
 Hoisting Code Snippet 1 :
+
 ```js
 var x = 7;
 
@@ -230,6 +229,7 @@ Uncaught ReferenceError: x is not defined at index.js:3
 ```
 
 Hoisting Code Snippet 4 :
+
 ```js
 
 console.log(getName);
@@ -238,7 +238,9 @@ function getName(){
     console.log("Namaste Javascript");
 }
 ```
+
 Output : 
+
 ```
 f getName(){
     console.log("Namaste Javascript");
@@ -263,14 +265,7 @@ var getName2 = function(){
 ```
 
 
-**What are functions in Javscript**
-
-
-
-Functions in Javascript
-
-
-**Question** What are functions in Javascript and How are they executed ?
+**What are functions in Javscript and How are they expected**
 
 Functions in JavaScript create their own execution contexts when invoked.
 
@@ -362,34 +357,20 @@ Global Execution Context deleted
 
 
 
-
-</details>
-
-
-
-
-
-
-
-
-
-
-<details><summary>shortest Javascript Program</summary>
-
+**shortest Javascript Program**
 
 Empty JS File is the shortest Javascript Program
 
 Shortest Javascript code Snippet 1:
 
 index.js 
+
 ```js
 
 
 ```
 
-
-
-The shortest JavaScript program is an empty file. Although there is no code to execute, the JavaScript engine performs several tasks behind the scenes.
+The shortest JavaScript program is an empty file. Although there is no code to execute, the Javascript engine performs several tasks behind the scenes.
 
 A global execution context is created, and the global memory component (variable environment) is set up.
 
@@ -408,7 +389,7 @@ window - is global object which is created with Global Memory Component along wi
 this === window > true in global execution context 
 
 
-**Question** Does that mean this and window is same ?
+**Does that mean this and window is same ?**
 
 this and window are not the same thing. Depending on context, this can refer to any object, while window always means window.
 
@@ -424,7 +405,8 @@ console.log(this.a);
 
 
 
-**Question** What is different between undefined and not defined ? 
+**What is different between undefined and not defined ?**
+
 - undefined means that memory has been allocated to a variable but no value has been assigned yet.
 - not defined refers to a variable that has not been declared or allocated any memory.
 
@@ -456,7 +438,7 @@ undefined vs Empty
 - undefined is a placeholder until a value is assigned to a variable.
 
 
-**Question** What is Scope, Lexical Environment and Scope Chain.
+**What is Scope, Lexical Environment and Scope Chain.**
 
 Scope refers to current context of code which determines the accessibility of variables to Javascript.
 
@@ -508,7 +490,7 @@ Global {
 An inner function can access variables which are in outer functions even if inner function is nested deep. In any other case, a function can't access variables not in its scope.
 
 
-# let and const in JS
+**How let and const in JS work ?**
 
 
 let and const are hoisted. 
@@ -624,6 +606,8 @@ Block is defined by curly braces. Block is also known as compound statement. We 
 
 Block Scope : what all variable and function we can access inside this block.
 
+Block Scope Code Snippet 1 : 
+
 ```
 {
 
@@ -637,6 +621,8 @@ Block Scope : what all variable and function we can access inside this block.
 
 let and const are block scoped
 
+
+Shadowing Code Snippet 1 : 
 
 ```js
 
@@ -652,15 +638,16 @@ var a = 100
 console.log(a)
 
 ```
-```
-10
-10
-```
 
+```
+10
+10
+```
 
 a was shadowed and the value was also modified
 
 
+Shadowing Code Snippet 2 : 
 
 ```js
 
@@ -682,7 +669,13 @@ console.log(b)
 ```
 
 
-**Illegal shadowing**
+Example of Illegal Shadowing (Code Snippet 3): 
+
+Shadowing Code Snippet 3 : 
+
+
+
+
 ```js
 
 let a = 20;
@@ -694,7 +687,9 @@ let a = 20;
 ```
 
 
-Perfectly valid shadowing
+Example of Perfectly valid shadowings (Code snippet 4, 5): 
+
+Shadowing Code Snippet 4 : 
 
 
 ```js
@@ -708,6 +703,7 @@ var a = 20;
 ```
 
 
+Shadowing Code Snippet 5 : 
 ```js
 
 var a = 20;
@@ -720,6 +716,8 @@ function x(){
 
 
 **Closures**
+
+Closure Code Snippet 1 :
 
 ```js
 
@@ -738,7 +736,7 @@ Function along with its lexical scope forms a closure
 
 A closure is function bundled together to its lexical state.
 
-
+Closure Code Snippet 2 : 
 
 ```js
 
@@ -765,7 +763,7 @@ now x( ) execution context is gone, nothing is there what will z( ) print
 
 Z will rememeber its lexical scope as not only the funtion was returned but closure was returned.
 
-
+Closure Code Snippet 3 :
 
 ```js
 function x(){
@@ -784,7 +782,7 @@ z();
 >7
 
 
-
+Closure Code Snippet 4 : 
 
 ```js
 function x(){
@@ -801,6 +799,9 @@ z();
 ```
 
 > 1000
+
+
+Closure Code Snippet 5 :
 
 
 ```js
