@@ -1,4 +1,4 @@
-## Running a restaurant is harder than System Design 
+## System Design Jargon ft. My dream of running restaurant
 
 
 **Horizontal Scaling** - Adding new machines to cope with computational demands
@@ -22,3 +22,7 @@
 
 
 **JSON Web Token (JWT)**  - Self-contained, stateless tokens that carry all the necessary information for authentication and authorization within the token itself
+
+
+**Session Id**
+
