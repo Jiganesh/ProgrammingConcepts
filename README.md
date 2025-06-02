@@ -1,4 +1,4 @@
-## System Design Jargon ft. Running a restaurant
+##  ̶S̶y̶s̶t̶e̶m̶ ̶D̶e̶s̶i̶g̶n̶ ̶f̶o̶r̶ ̶D̶u̶m̶m̶i̶e̶s̶ System Design Gadho Keliye
 
 
 **Horizontal Scaling** - Adding new machines to cope with computational demands
@@ -51,4 +51,10 @@
 **Time to live / Hop Limit** - 
 
 
+**Cache**
 
+
+
+
+
+### ROM ROM BHAIYO, SYSTUM PHAAD DENGE !
