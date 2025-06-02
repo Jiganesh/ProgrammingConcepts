@@ -29,6 +29,25 @@
 **Authorization** - Process of giving someone the ability to access a resource.
 - Example : A Diner will only authorize its staff members (authorized users) to access kitchen
 
+**Cookies** - small pieces of code that a website stores in your browser to track who you are and what you are doing.
+- Example : A Diner has a challenge to eat most amount of burgers, you completed the challenge and now you are on wall of fame. The photo (cookie) on wall of fame (browser)  provides information about you and your record in that diner (session). If you remove the photo (clear cookie) that information will be gone.
+
+
 **JSON Web Token (JWT)**  - Self-contained, stateless tokens that carry all the necessary information for authentication and authorization within the token itself.
-- Example : Diner has to authenticate its staff and staff can access kitchen. The guard cannot allow unauthenticated staff. To avoid redundant authentication, staff is provided a badge (JWT) which allows them to access kitchen instead of going through authentication process everyday.
+- Example : A Diner has to authenticate its staff and staff can access kitchen. The guard cannot allow unauthenticated staff. To avoid redundant authentication, staff is provided a badge (JWT) which allows them to access kitchen instead of going through authentication process everyday.
+
+
+**Functional Requirements** - Requirements that describe behaviour, functionality and operations of the system.
+- Example : A Diner should serve Burgers and Steak.
+
+
+**Non Functional Requirements** - Requirements that describe performance, quality and constraints under which system should operate
+- Example : A Diner should serve best steaks in town.
+
+**Content Delivery Network** -
+
+
+**Time to live / Hop Limit** - 
+
+
 
