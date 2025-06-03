@@ -1,4 +1,4 @@
-##  ̶S̶y̶s̶t̶e̶m̶ ̶D̶e̶s̶i̶g̶n̶ ̶f̶o̶r̶ ̶D̶u̶m̶m̶i̶e̶s̶ System Design Gadho Keliye
+## ROM ROM BHAIYO, SYSTUM PHAAD DENGE !
 
 
 **Horizontal Scaling** - Adding new machines to cope with computational demands
@@ -55,6 +55,3 @@
 
 
 
-
-
-### ROM ROM BHAIYO, SYSTUM PHAAD DENGE !
