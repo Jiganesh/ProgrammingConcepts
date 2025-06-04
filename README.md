@@ -44,14 +44,13 @@
 **Non Functional Requirements** - Requirements that describe performance, quality and constraints under which system should operate
 - Example : A Diner should serve best steaks in town.
 
+**Cache** - Storage layer between application and datastore storing frequently accessed data for easy and quick access.
+Caching is strategy to reduce latency and improve efficiency of data retrival
+- Example : A Diner delivers food. For fast delivery diner opens cloud kitchens and keeps best seller and frequently ordered dishes ready so they can be delivered faster.
+
+
 **Content Delivery Network (CDN)** - Geographically dispersed servers used to deliver static content like images, videos, JS files etc.
 - Example : A Diner delivers food. Greater the distance, Longer the wait time resulting in bad customer experience. The Diner opens cloud kitchens in strategic locations and keeps best seller dishes ready to go to deliver faster.
 
 
 **Time to live / Hop Limit** - 
-
-
-**Cache**
-
-
-
