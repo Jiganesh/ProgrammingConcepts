@@ -54,3 +54,19 @@ Caching is strategy to reduce latency and improve efficiency of data retrival
 
 
 **Time to live / Hop Limit** - 
+
+
+**Computer Network**
+
+
+
+
+**OSI Model** -
+
+- Physical Layer
+- Data Link Layer
+- Network Layer
+- Transport Layer
+- Session Layer
+- Presentation Layer
+- Application Layer
