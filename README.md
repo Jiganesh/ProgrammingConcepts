@@ -48,12 +48,14 @@
 Caching is strategy to reduce latency and improve efficiency of data retrival
 - Example : A Diner delivers food. For fast delivery diner opens cloud kitchens and keeps best seller and frequently ordered dishes ready so they can be delivered faster.
 
-
 **Content Delivery Network (CDN)** - Geographically dispersed servers used to deliver static content like images, videos, JS files etc.
 - Example : A Diner delivers food. Greater the distance, Longer the wait time resulting in bad customer experience. The Diner opens cloud kitchens in strategic locations and keeps best seller dishes ready to go to deliver faster.
 
 
-**Time to live / Hop Limit** - 
+**Time to live (TTL) / Hop Limit** - mechanism (generally a value) used for data validity and expiration in network
+- Example : A Diner has best seller fried icecream on the menu. The fried icecream has to be served within 10 minutes else it starts melting and crispy coat becomes moist. TTL of fried icecream is 10 minutes.
+
+
 
 
 **Computer Network**
