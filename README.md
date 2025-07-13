@@ -56,19 +56,29 @@ Caching is strategy to reduce latency and improve efficiency of data retrival
 - Example : A Diner has best seller fried icecream on the menu. The fried icecream has to be served within 10 minutes else it starts melting and crispy coat becomes moist. TTL of fried icecream is 10 minutes.
 
 
+**Open Systems Interconnection (OSI Model)** - framework to understand how network commmunication work.
+
+Let's understand our Diner's Application with OSI Model
+
+Application Layer - Layer 7 (User Friendly Interface) - top layer where actual application and service reside.
+- Exampler : Diner's Web Application 
+
+Presentation Layer - Layer 6 (Data Translation) - translate data into format receiving device can understand
+- Example : Encryption of customer / admin data, Compression of files uploaded to Binary Large Object, Data Conversion
+
+Session Layer - Layer 5 (Managing Session)  - maintains, and ends communication between devices. Also manages checkpoints, to pause and resume conversations.
+- Example : Customer added few dishes to order and closed the application, after opening the application he can resume with same order.
+
+Transport Layer - Layer 4 (Managing Conversations) - ensures reliable communication between devices
+- Example : Customer placed an order for biryani when the data is received on the other end it should place order for biryani.
+
+Network Layer - Layer 3 - (Routing) routes data packets between different networks using IP addresses
+- Example : Searching with Diner's url on web
 
 
-**Computer Network**
+Data Link Layer - Layer 2 - (Addressing and Framing): this layer adds unique addresses (MAC addresses) to data packets, ensuring they reach the correct destination on a local network
+- Example : Order placed from Jiganesh to Diner for Biryani
 
 
-
-
-**OSI Model** -
-
-- Physical Layer
-- Data Link Layer
-- Network Layer
-- Transport Layer
-- Session Layer
-- Presentation Layer
-- Application Layer
+Physical Layer - Layer 1 - (Envelope): lowest layer, deals with the actual physical connection between devices, such as cables, switches, and hubs. responsible for transmitting raw bits (0s and 1s) over the network medium
+- Example : Wifie connection 
