@@ -52,6 +52,15 @@ Caching is strategy to reduce latency and improve efficiency of data retrival
 - Example : A Diner delivers food. Greater the distance, Longer the wait time resulting in bad customer experience. The Diner opens cloud kitchens in strategic locations and keeps best seller dishes ready to go to deliver faster.
 
 
+**Hashing** - Process of transforming provided data with a hash function resulting hash key
+- Example : A Diner has multiple sub brands like Fasoos (famous for frankie's), Oven Story (famous for pizza's), Behrouz(famous for Biryani's) under one roof on different floors. Our Manager (hash function) will process the user request and send them to respective floor (hash key - floor 0, floor 1, floor 2 etc).
+
+
+**Consistent Hashing** - Distributed hashing technique to load balance and minimize rehashing when the number of nodes in a system change.
+- Example :   A Diner has 4 chefs specializing in different cuisines, each handling orders based on a customer's table number. If one chef calls in sick, traditional hashing would reassign all tables, causing confusion. With consistent hashing, only a portion of that chef's tables get redistributed to other chefs, while most tables keep their original chef assignments.
+
+
+
 **Time to live (TTL) / Hop Limit** - mechanism (generally a value) used for data validity and expiration in network
 - Example : A Diner has best seller fried icecream on the menu. The fried icecream has to be served within 10 minutes else it starts melting and crispy coat becomes moist. TTL of fried icecream is 10 minutes.
 
