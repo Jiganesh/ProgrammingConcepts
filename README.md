@@ -90,4 +90,7 @@ Data Link Layer - Layer 2 - (Addressing and Framing): this layer adds unique add
 
 
 Physical Layer - Layer 1 - (Envelope): lowest layer, deals with the actual physical connection between devices, such as cables, switches, and hubs. responsible for transmitting raw bits (0s and 1s) over the network medium
-- Example : Wifie connection 
+- Example : Wifi connection 
+
+**Thundering Herd Problem** - all failed requests retry at identical intervals leading to cascading failures or no chances of recovery.
+- Example : A customer in Diner asks server regarding his order, the server fails to retrieve his order. The customer keeps probing and asking the server regarding his order which overwhelms the server.
