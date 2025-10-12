@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+**How Javascript Works and How Javascript Code is executed ?**
+=======
 **How Javascript works and How Javascript Code is executed ?**
+>>>>>>> 077522adaf9f513c2f62914d00161b19b0e77e53
 
 JavaScript is a weakly-typed synchronous single-threaded language.
 
@@ -8,7 +12,11 @@ JavaScript is a weakly-typed synchronous single-threaded language.
 
 Everything in javascript happens inside an execution context. The execution context is like a big box or container where the JavaScript code is executed.
 
+<<<<<<< HEAD
+Execution Context has two components 
+=======
 Execution Context has two components :
+>>>>>>> 077522adaf9f513c2f62914d00161b19b0e77e53
 
 |Memory Component | Code Component|
 |----|---|
@@ -168,6 +176,12 @@ Callstack is also known by
 
 **What is Hoisting in Javascript ?**
 
+<<<<<<< HEAD
+
+What is Hoisting in Javascript ?
+
+=======
+>>>>>>> 077522adaf9f513c2f62914d00161b19b0e77e53
 Hoisting is a concept in JavaScript that allows variables and function declarations to be accessed before they are actually defined in the code. During the memory creation phase of the execution context, variables are initialized to undefined, while function declarations are stored in memory as they are.
 
 Hoisting works differently for function declarations, function expressions and arrow function expression. Function declarations are fully hoisted, while function expressions and arrow function expression behave like variables and are hoisted with an initial value of undefined.
@@ -265,13 +279,19 @@ var getName2 = function(){
 ```
 
 
+<<<<<<< HEAD
+**Question** What are functions in Javascript and How are they executed ?
+
+=======
 **What are functions in Javscript and How are they expected**
 
+>>>>>>> 077522adaf9f513c2f62914d00161b19b0e77e53
 Functions in JavaScript create their own execution contexts when invoked.
 
 Each function has its own variable environment (Memory Component), allowing the use of local variables that are scoped within the function.
 
 Variables declared within a function are accessible only within that function, unless explicitly returned or accessed from an outer scope (concept of closures)
+
 
 
 Functions Code Snippet 1 : 
@@ -359,6 +379,23 @@ Global Execution Context deleted
 
 **shortest Javascript Program**
 
+<<<<<<< HEAD
+
+
+
+
+
+
+
+
+
+
+
+shortest Javascript Program
+
+
+=======
+>>>>>>> 077522adaf9f513c2f62914d00161b19b0e77e53
 Empty JS File is the shortest Javascript Program
 
 Shortest Javascript code Snippet 1:
@@ -386,10 +423,16 @@ In different JavaScript Runtime Environments, the global object may have differe
 window - is global object which is created with Global Memory Component along with Global Execution Context this is created.
 
 
-this === window > true in global execution context 
+this === window this is true in global execution context 
 
 
+<<<<<<< HEAD
+
+
+**Question** Does that mean this and window is same ?
+=======
 **Does that mean this and window is same ?**
+>>>>>>> 077522adaf9f513c2f62914d00161b19b0e77e53
 
 this and window are not the same thing. Depending on context, this can refer to any object, while window always means window.
 
@@ -404,9 +447,13 @@ console.log(this.a);
 ```
 
 
+<<<<<<< HEAD
+**Question** What is different between undefined and not defined ? 
+=======
 
 **What is different between undefined and not defined ?**
 
+>>>>>>> 077522adaf9f513c2f62914d00161b19b0e77e53
 - undefined means that memory has been allocated to a variable but no value has been assigned yet.
 - not defined refers to a variable that has not been declared or allocated any memory.
 
@@ -438,8 +485,13 @@ undefined vs Empty
 - undefined is a placeholder until a value is assigned to a variable.
 
 
+<<<<<<< HEAD
+**Question** What is Scope, Lexical Environment and Scope Chain.
+
+=======
 **What is Scope, Lexical Environment and Scope Chain.**
 
+>>>>>>> 077522adaf9f513c2f62914d00161b19b0e77e53
 Scope refers to current context of code which determines the accessibility of variables to Javascript.
 
 Lexical means In hierarchy, In order
@@ -484,16 +536,22 @@ Global {
         Inner
     }
 }
+
+
 // Inner is surrounded by lexical scope of Outer
 ```
 
 An inner function can access variables which are in outer functions even if inner function is nested deep. In any other case, a function can't access variables not in its scope.
 
 
+<<<<<<< HEAD
+**Question** What is let and const in JS
+=======
 **How let and const in JS work ?**
+>>>>>>> 077522adaf9f513c2f62914d00161b19b0e77e53
 
 
-let and const are hoisted. 
+let and const declarations are hoisted but the hoisting is different from var
 
 Let and Const Code snippet 1 : 
 
@@ -501,9 +559,28 @@ Let and Const Code snippet 1 :
 console.log(a)
 let a = 10
 var b = 100
+
+console.log(window.a) 
 ```
 ```
 Uncaught ReferenceError: cannot access 'a' before initialization at index.js:1
+```
+
+It looks like let isn't hoisted, but it is - Both a and b are actually initialized as undefined in hoisting stage. var b is inside the storage space of GLOBAL, and a is in a separte memory object called script, where it can be acessed only after assigning some value to it first i.e one can access a only if it assigned a value.
+
+
+Let and Const Code snippet 2 : 
+
+
+
+```js
+
+let a = 10
+var b = 100
+
+console.log(window.a) // undefined
+console.log(window.b) // 100
+
 ```
 
 
@@ -552,9 +629,6 @@ var a  = 100
 Uncaught SyntaxError : Identified 'a' has already been declared
 ```
 
-
-
-
 In let you can initialize after but in const you have to initialize it while declaring.
 In let you cannot re-declare and in const you cannot re-initialize it
 
@@ -593,7 +667,21 @@ b = 1000;
 Uncaught TypeError: Assignment to constant variable at index.js:6
 ```
 
-How to avoid temporal deadzone ?
+
+**Question** How to avoid temporal deadzone ?
+
+Time between when the let variable was hoisted until it is initialized any value 
+
+```js
+let a;
+
+// a is in TDZ
+
+
+a = 100
+
+
+```
 
 >Initialize at top
 
@@ -601,6 +689,18 @@ How to avoid temporal deadzone ?
 
 **Block Scope and Shadowing in JS**
 
+<<<<<<< HEAD
+
+
+
+
+Block Scope and Shadowing in JS
+
+
+
+
+=======
+>>>>>>> 077522adaf9f513c2f62914d00161b19b0e77e53
 Block is defined by curly braces. Block is also known as compound statement. We group multiple statements in a block where js expects one one statment.
 
 
@@ -715,6 +815,14 @@ function x(){
 ```
 
 
+<<<<<<< HEAD
+
+
+
+
+
+=======
+>>>>>>> 077522adaf9f513c2f62914d00161b19b0e77e53
 **Closures**
 
 Closure Code Snippet 1 :
