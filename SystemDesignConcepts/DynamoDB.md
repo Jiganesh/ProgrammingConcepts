@@ -107,7 +107,41 @@ Reads can be scaled when we can relax consistency.
 **Importance of "Partition Abstraction"**
 
 
-One DynamoDB Table is split 
+One DynamoDB Table is split into partitions and distributed across the cluster.
+
+
+One table T is split into 3 partitions P1, P2, P3. Each partition is replicated twice across the cluster for High Availibility, Fault Tolerance
+
+
+If Load on one partition increases beyond certain threshold, ( docs within that are updated frequently), it can be split into two and placed on different nodes.
+
+
+![alt text](DynamoDBSplitPartition.png)
+
+
+
+**Storage Replicas**
+
+![alt text](DynamoDBStorageReplica.png)
+
+
+**Log Replica**
+
+There are some storage replicas that only stores and replicates Write Ahead Logs for High Availability and Fault Tolerance.
+
+
+
+
+
+
+**Microservices that makeup DynamoDB**
+
+
+Metadata Service
+
+Stores routing information about tables, indexes and replicas
+
+
 
 
 
