@@ -130,13 +130,12 @@ If Load on one partition increases beyond certain threshold, ( docs within that 
 There are some storage replicas that only stores and replicates Write Ahead Logs for High Availability and Fault Tolerance.
 
 
-
 ![alt text](DynamoDBLogReplica.png)
 
 **Microservices that makeup DynamoDB**
 
 
-Metadata Service
+**Metadata Service**
 
 Stores routing information about tables, indexes and replicas. Metadata Service holds the most critical mapping for all partitions of table, key ranges of each partition, and storage node of each parition.
 
