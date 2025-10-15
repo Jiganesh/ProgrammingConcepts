@@ -131,20 +131,29 @@ There are some storage replicas that only stores and replicates Write Ahead Logs
 
 
 
-
-
+![alt text](DynamoDBLogReplica.png)
 
 **Microservices that makeup DynamoDB**
 
 
 Metadata Service
 
-Stores routing information about tables, indexes and replicas
+Stores routing information about tables, indexes and replicas. Metadata Service holds the most critical mapping for all partitions of table, key ranges of each partition, and storage node of each parition.
 
 
+Router uses metadata service to know where to route the current service
+Router downloads routing information locally and keeps it handy. Routing Information rarely changes ( Cache hit 99.75% ) routing info rarely changes.
+
+When Cache is empty, the requests go to metadata service which causes sudden spike.
+To reduce reliance on local cache, Amazon build MemDS which is optimized for range queries (less than, greater than and between)
 
 
+MemDS is implemented using Patricia and Merkle Trees. MemDS distributes
+MemDS is provisioned for actual load. It is fired asynchronously even after the metadata is found in Routing Cache. This way all requests are still going to MemDS just to keep MemDS prepared for the load.
 
+MemDS is transient hence Metadata Service is Persistant. 
+
+![alt text](DynamoDBMetadataService.png)
 
 
 
