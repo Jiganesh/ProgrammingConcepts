@@ -110,7 +110,7 @@ Reads can be scaled when we can relax consistency.
 One DynamoDB Table is split into partitions and distributed across the cluster.
 
 
-One table T is split into 3 partitions P1, P2, P3. Each partition is replicated twice across the cluster for High Availibility, Fault Tolerance
+One table T is split into 3 partitions P1, P2, P3. Each partition is replicated twice across the cluster for High Availibility, Fault Tolerance.
 
 
 If Load on one partition increases beyond certain threshold, ( docs within that are updated frequently), it can be split into two and placed on different nodes.
