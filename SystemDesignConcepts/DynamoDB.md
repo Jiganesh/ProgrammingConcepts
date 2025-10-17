@@ -150,7 +150,7 @@ To reduce reliance on local cache, Amazon build MemDS which is optimized for ran
 MemDS is implemented using Patricia and Merkle Trees. MemDS distributes
 MemDS is provisioned for actual load. It is fired asynchronously even after the metadata is found in Routing Cache. This way all requests are still going to MemDS just to keep MemDS prepared for the load.
 
-MemDS is transient hence Metadata Service is Persistant. 
+MemDS is transient and Metadata Service is persistant. 
 
 ![alt text](DynamoDBMetadataService.png)
 
