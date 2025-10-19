@@ -155,15 +155,170 @@ MemDS is transient and Metadata Service is persistant.
 ![alt text](DynamoDBMetadataService.png)
 
 
+**Storage Admission Control**
+
+Admission control ensures storage nodes are not overloaded and requests are rate limited.
+
+One Storage node can host partiions from different tables. Storage node independently performed "Admission control" based on the partitions hosted on it.
+
+Every single thing in the world has its limit. 
+
+![alt text](DynamoDBStorageAdmissionControl.png)
+
+Auto Admin Service -  would ensure that one storage node is never assigned partitions whose cumulative limit exceeds 300RPS
+
+
+
+DynamoDB users confgured Write Capacity Unit and Read Capacity Unit for a table and this was equally divided across its partitions 
+
+
+eg : RCU (T1) = 1000 RPS splits in partitions P1 and P2, RCU(P1) 500RPS and RCU(P2) = 500RPS
+
+Now say P2 Splits into P21 and P22
+
+RCU are distributed equally RCU(P1) = 333RPS, RCU(P21) = 333RPS, RCU(P22) = 333RPS
+
+*Assuming all keys are equally likely to be accessed
+
+**BUT WHAT IF THEY ARE NOT !!!***
+
+Say some keys are more likely be accessed / updated. for eq - social media post, new post are more likely to be reacted.
+
+
+Hot partition now has lesser throughput to work with 
+
+eg P2 had 500RPS, after the split it was reduced to 333RPS in P21 and P22 but after the split customer was expecting 500RPS in both partitions (abstraction over the customer) but spliting the partition _ you just diluted the throughput.
+
+
+**How to handle throughput dilution ?**
+
+
+A. Bursting - 
+
+In real world, partitions have non-uniform access so all partions do not use their allocated throughput simultaneously.
+
+Idea : we can let some partition to tap into the unused (only when it is available) throughput capacity of the node.
+
+Unused Capacity = BURST capacity
+
+![alt text](DynamoDBBursting.png)
+
+
+Implementation for Bursting : 
+
+Each partition on a storage node has two token buckets - allocated and burst.
+
+Each storage node has a token bucket at node level (max throughput)
 
 
 
 
 
 
+**B. Adaptive Capacity**
+
+To better absorb long live spikes! -> cannot be handled by burst
+
+
+eg : skewed workload (partitioned by time and updates & inserts on most recent datetime which will make inserts in most recent partition)
+
+if table experienced throttling but table - level throughput is not exceeded.
+
+
+Adaptive capacity adjusts the partition throughput in proportion.
+
+Say P(T1) = 1000 and Auto Admin Service optionally moves them to different storage.
+
+
+![alt text](DynamoDBAdaptiveCapactiy.png)
+
+Adaptive Capacity is Reactive, It takes time to REACT (to adjust partitioning) meanwhile the tables will have briefly observed unavailability.
+
+
+**Global Admission Control**
+
+Bursting helps with short lived spikes with Adaptive Capacity is "reactive" thus while its happening, tables have breifly observed unavailability
+
+Key Idea : Centrally track table level throughput consumption.
+
+
+Request Router maintains local token bucket adn periodically get new from GAC to better handle non uniform workloads.
+
+GAC does not let client breach partition level limits.
 
 
 
 
 
+**Durability**
+ 
+prevent, detect and correct any possible data losses.
+
+
+
+**Hardware Failures**
+
+
+DynamoDB uses Write Ahead Logs for providing durability and crash recovery.
+
+
+Write Ahead Logs are periodically archived to S3.
+
+
+
+What about logs that are not yet archived to S3 ? 
+
+Note : partitions have replication factor of 3 if a node goes down, a new node is assigned the responsibility. The new node copies BTree and WAL from the other two live replicas.
+
+
+**Silent Data Errors** 
+
+Any storage layer has to enusre that it NEVER writes any INCORRECT data.
+
+If customer writes "BAT" then "BAT" is what get persisted.
+
+- from customer
+- over the network
+- into the system
+- across the services
+- on the disk
+
+
+DynamoDB uses and verifies "Checksums" at every single data transfer this ensures detection and prevention of silent data errors
+
+Event the log files archived to S3 has checksum check every file has checksum and content metadata file for verification.
+
+
+
+Continous verification 
+
+
+DynamoDB continously verifies data at rest and ensures all 3 (all done through checksums) replicas of partition have exact same data. Live replica data matching with archived on S3 (replicas are constructed from logs).
+
+
+
+
+
+**Aggressive Testing**
+
+- Stress Testing
+- Failure injection testing
+- Using formal methods with TLA+ () to test distributed (Transaction and Control Plane) API flow.
+
+
+
+**Availability**
+
+DynamoDB tables are replicated across Availability Zones in a region 
+Few tests that DDB Team run periodically 
+
+- Resilienc to node, rack aand AZ failures
+- Resilancy to power outage
+- Resiliancy to data corruption
+
+Availability of partitions
+
+enough healty replicas for write quorum adn a leader
+
+if one partttion replica goes down leader adds a new log (nodt with log only not Btree) replica.
 
