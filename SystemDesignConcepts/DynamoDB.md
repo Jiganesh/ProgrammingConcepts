@@ -1,6 +1,6 @@
 # DynamoDB 
 
-It is a `highly available` `key-value storage system` from AWS providing consistent performance at any scale.
+It is a `highly available` `key-value datastore` from AWS providing consistent performance at any scale.
 
 ```
 In 2021 during 66 hours PRIME DAY SALE
@@ -10,11 +10,9 @@ In 2021 during 66 hours PRIME DAY SALE
 - High Availability with single digit millisecond performance
 ```
 
-
-
 **Goal behind DynamoDB**
 
-to provide consistent performance at any scale with low single digit millisecond latency with high availability and reliability.
+To provide consistent performance at any scale with low single digit millisecond latency with high availability and reliability.
 
 **Workload Pattern**
 
@@ -41,7 +39,7 @@ Each `ITEM` is uniquely identified by its `PRIMARY KEY`
 + SORT KEY : optional (primary key = partition key  + sort key)
 ```
 
-![alt text](images/DynamoDBKeys.png)
+![DynamoDBKeys Image ](images/DynamoDBKeys.png)
 
 
 DynamoDB also supports `secondary indexes`. Consider Secondary index's as tables with two columns.
