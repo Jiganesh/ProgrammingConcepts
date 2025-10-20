@@ -41,8 +41,6 @@ Each `ITEM` is uniquely identified by its `PRIMARY KEY`
 + SORT KEY : optional (primary key = partition key  + sort key)
 ```
 
-![alt text](image.png)
-
 ![alt text](images/DynamoDBKeys.png)
 
 
