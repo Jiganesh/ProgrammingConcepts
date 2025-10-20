@@ -1,6 +1,6 @@
 # DynamoDB 
 
-It is a popular Database from AWS providing consistent performance at any scale.
+It is a `highly available` `key-value storage system` from AWS providing consistent performance at any scale.
 
 ```
 In 2021 during 66 hours PRIME DAY SALE
@@ -11,9 +11,10 @@ In 2021 during 66 hours PRIME DAY SALE
 ```
 
 
+
 **Goal behind DynamoDB**
 
-to provide consistent performance at any scale with low single digit millisecond latency.
+to provide consistent performance at any scale with low single digit millisecond latency with high availability and reliability.
 
 **Workload Pattern**
 
@@ -40,12 +41,16 @@ Each `ITEM` is uniquely identified by its `PRIMARY KEY`
 + SORT KEY : optional (primary key = partition key  + sort key)
 ```
 
+![alt text](image.png)
+
 ![alt text](images/DynamoDBKeys.png)
 
 
-DynamoDB also supports `secondary indexes`. Consider Secondary Indexs as tables with two coloumns.
+DynamoDB also supports `secondary indexes`. Consider Secondary index's as tables with two columns.
 
-`Indexed Value -> Primary Key` mappings can also be created
+`Indexed Value -> Primary Key` mappings can also be created. 
+
+Secondary Indexes in DynamoDB allow efficient access to data using attributes other than the primary key, enabling different query patterns.
 
 
 Indexed on Age in the table below : 
@@ -54,7 +59,6 @@ Indexed on Age in the table below :
 10 -> {1} 1 is primary key and 10 is age
 10 -> {2}
 10 -> {3}
-
 ```
 
 
@@ -80,7 +84,7 @@ Any replica can trigger the Election. When a leader is elected, it can continue 
 
 
 
-* this is at PARTITION replica level and not at data node level
+*All this happens at PARTITION replica level and not at data node level.
 
 
 
@@ -113,7 +117,7 @@ One DynamoDB Table is split into partitions and distributed across the cluster.
 One table T is split into 3 partitions P1, P2, P3. Each partition is replicated twice across the cluster for High Availibility, Fault Tolerance.
 
 
-If Load on one partition increases beyond certain threshold, ( docs within that are updated frequently), it can be split into two and placed on different nodes.
+If load on one partition increases beyond certain threshold, ( data within that are updated frequently), it can be split into two and placed on different nodes.
 
 
 ![alt text](images/DynamoDBSplitPartition.png)
