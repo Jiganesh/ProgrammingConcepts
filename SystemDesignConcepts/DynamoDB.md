@@ -40,7 +40,7 @@ Each `ITEM` is uniquely identified by its `PRIMARY KEY`
 + SORT KEY : optional (primary key = partition key  + sort key)
 ```
 
-![alt text](DynamoDBKeys.png)
+![alt text](images/DynamoDBKeys.png)
 
 
 DynamoDB also supports `secondary indexes`. Consider Secondary Indexs as tables with two coloumns.
@@ -66,7 +66,7 @@ Each partition has Multiple Replicas (not read replicas like in mysql) distribut
 
 
 
-![alt text](DynamoDBPartition.png)
+![alt text](images/DynamoDBPartition.png)
 
 
 ```diff
@@ -84,7 +84,7 @@ Any replica can trigger the Election. When a leader is elected, it can continue 
 
 
 
-![alt text](DynamoDBElection.png)
+![alt text](images/DynamoDBElection.png)
 
 
 **What leader replica does ?**
@@ -101,7 +101,7 @@ Reads can be scaled when we can relax consistency.
 
 
 
-![alt text](DynamoDBWritesOnLeaderReplica.png)
+![alt text](images/DynamoDBWritesOnLeaderReplica.png)
 
 
 **Importance of "Partition Abstraction"**
@@ -116,13 +116,13 @@ One table T is split into 3 partitions P1, P2, P3. Each partition is replicated 
 If Load on one partition increases beyond certain threshold, ( docs within that are updated frequently), it can be split into two and placed on different nodes.
 
 
-![alt text](DynamoDBSplitPartition.png)
+![alt text](images/DynamoDBSplitPartition.png)
 
 
 
 **Storage Replicas**
 
-![alt text](DynamoDBStorageReplica.png)
+![alt text](images/DynamoDBStorageReplica.png)
 
 
 **Log Replica**
@@ -130,7 +130,7 @@ If Load on one partition increases beyond certain threshold, ( docs within that 
 There are some storage replicas that only stores and replicates Write Ahead Logs for High Availability and Fault Tolerance.
 
 
-![alt text](DynamoDBLogReplica.png)
+![alt text](images/DynamoDBLogReplica.png)
 
 **Microservices that makeup DynamoDB**
 
@@ -152,7 +152,7 @@ MemDS is provisioned for actual load. It is fired asynchronously even after the 
 
 MemDS is transient and Metadata Service is persistant. 
 
-![alt text](DynamoDBMetadataService.png)
+![alt text](images/DynamoDBMetadataService.png)
 
 
 **Storage Admission Control**
@@ -163,7 +163,7 @@ One Storage node can host partiions from different tables. Storage node independ
 
 Every single thing in the world has its limit. 
 
-![alt text](DynamoDBStorageAdmissionControl.png)
+![alt text](images/DynamoDBStorageAdmissionControl.png)
 
 Auto Admin Service -  would ensure that one storage node is never assigned partitions whose cumulative limit exceeds 300RPS
 
@@ -201,7 +201,7 @@ Idea : we can let some partition to tap into the unused (only when it is availab
 
 Unused Capacity = BURST capacity
 
-![alt text](DynamoDBBursting.png)
+![alt text](images/DynamoDBBursting.png)
 
 
 Implementation for Bursting : 
@@ -230,7 +230,7 @@ Adaptive capacity adjusts the partition throughput in proportion.
 Say P(T1) = 1000 and Auto Admin Service optionally moves them to different storage.
 
 
-![alt text](DynamoDBAdaptiveCapactiy.png)
+![alt text](images/DynamoDBAdaptiveCapactiy.png)
 
 Adaptive Capacity is Reactive, It takes time to REACT (to adjust partitioning) meanwhile the tables will have briefly observed unavailability.
 
@@ -322,3 +322,85 @@ enough healty replicas for write quorum adn a leader
 
 if one partttion replica goes down leader adds a new log (nodt with log only not Btree) replica.
 
+
+![alt text](images/DynamoDBPaxosGroup.png)
+
+
+
+Handling Gray Network Failures
+
+Communication issue b/w leader adn follower of a partition replica
+
+
+consequence : Replica that interprets connectivity issue as leader outage, will initiage leader Elections (Leader is fit and fine)
+
+
+Solution : Before initiating leader election, follower iwll talk to other followers to check if then can communicate with leader or not
+
+
+if some follwers can communicate fowllower aborts leader elction.
+This counter checking reduces False positives
+
+
+**Measuring Availability**
+
+- Regular backend table level monritoring 
+
+- Private canary application in each A2 which makes calls to DDB to measure perceived perfomace adn latencies
+
+
+Tons of alarms on all the metrics
+
+
+** External Services**
+
+All the services that YdnamoDb depends on should be more avialable thatn dynamodB
+
+also dynamodb shoudl be able to operate event when some service that id deps on are having an outage
+
+
+Ex: DynamoDB depends on AWS IAM and AWS KMS 
+
+DynamoDB can operate event when these services are imparied.
+
+DDB Caches the encryption keys and auth tokens 
+
+
+DDB Periodically refreshes them synchronouly 
+
+if IAM or KMS are down, DDB will still operate till cache expires 
+
+
+
+
+**Deployments**
+
+DynamoDB deploys wihtou a need of any maintainance and with no impact on performance and availability .
+
+New DDB software rollout requires rolling out multiple services autoadmin, router, metadaata etc
+
+
+**pre requisite of deploying with confidence**
+
+It is about having a strong rollback strategy + canary deploments + automatic rollback ( elevated error rates)
+
+key challenges : Deployments are not atomic
+
+
+Deployment happended on two out of four but fialed on other two
+
+plus not all deployment can be backward compatible 
+
+
+eg : new type of message that old code does not understand
+
+
+**Read Write Deployments**
+
+Instead of deploying all the changes at once split them into read and write changes
+
+
+1. deply the changes that allows "read" of new type of data
+(deploy consumer code first and then producer code).
+
+2. then deploy "write" changes that produces that message
