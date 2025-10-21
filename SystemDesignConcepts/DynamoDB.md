@@ -59,6 +59,7 @@ Indexed on Age in the table below :
 
 
 
+
 DynamoDB Table is divided into `PARTITIONS`. Each Partition is disjoint subset and holds contiguous key-range
 
 
@@ -83,6 +84,33 @@ Any replica can trigger the Election. When a leader is elected, it can continue 
 *All this happens at PARTITION replica level and not at data node level.
 
 
+DynamoDB partitions are constrained to approximately 10GB of data.
+
+
+
+**DynamoDB SECONDARY INDEXES**
+
+A DynamoDB secondary index is a feature that lets you query a table using attributes other than the primary key. 
+
+GSI - Global Secondary Indexes
+LSI - Local Secondary Indexes
+
+
+An Item collection is a group of items that all share the same partition key value.
+
+
+|Global Secondary Indexes| Local Secondary Indexes|
+|-|-|
+|20 per table can be created| 5 per table can be created|
+|Add or Remove GSI Table any time| Can only be created with Base table and Non Removable|
+|Use Any Partition Key, Any Sort Key|Original Partition Key, Any Sort Key|
+|Implemented like shadow table| Kept with Base table |
+|Uses its own capacity and partition| Competes with Base Table for capacity and partition|
+|Upto 400KB Item limit applies to GSI| 400KB Item limit applies to both base table and all LSI projections|
+|Item Collections can be split (No size or throughput limit)|Item Collections cannot be split (Max 10GB, 1000WCU, 3000RCU)|
+|only Eventual Reads| Strong Reads or Eventual Reads|
+
+
 
 ![alt text](images/DynamoDBElection.png)
 
@@ -98,7 +126,6 @@ Strong - goes to leader replica
 Eventual - goes to any replica    
 
 Reads can be scaled when we can relax consistency.
-
 
 
 ![alt text](images/DynamoDBWritesOnLeaderReplica.png)
