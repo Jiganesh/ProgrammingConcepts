@@ -123,4 +123,4 @@ Let's understand our Diner's Application with OSI Model
 
 **Domain Name System** - protocol that translates human friendly domain name to IP Address
 
-![DNS.png](/SystemDesignConcepts/DNS.png)
+![DNS.png](/SystemDesignConcepts/images/DNS.png)
