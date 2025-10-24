@@ -9,7 +9,6 @@ Representation of the entities is central to this idea
 
 Client Demands, Server Serves
 
-d 
 
 Everything in REST is a Resource
 
