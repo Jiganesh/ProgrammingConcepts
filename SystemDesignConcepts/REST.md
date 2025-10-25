@@ -14,7 +14,7 @@ Everything in REST is a Resource
 
 
 Entity in your application service is a resource.
-
+ 
 
 
 All the data of the application belongs to some entity type (external).
