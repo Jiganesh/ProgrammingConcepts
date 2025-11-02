@@ -23,6 +23,7 @@
 - Time To Live (TTL) / Hop Limit
 - OSI Model
 - Thundering Herd Problem
+- REST 
 
 
 
@@ -124,3 +125,11 @@ Let's understand our Diner's Application with OSI Model
 **Domain Name System** - protocol that translates human friendly domain name to IP Address
 
 ![DNS.png](/SystemDesignConcepts/images/DNS.png)
+
+
+**REST** - REpresentational State Transfer which is an architectural style for building web services. It is not a protocol but set of guidelines regarding uniform interface, statelessness, Layered System, Cachebility, Code on Demand to manage communication between client and server.
+
+
+
+
+
