@@ -31,3 +31,6 @@ The state of the resource at any particular time is known as the resource repres
 
 
 All these principles help RESTful applications to be simple, lightweight, and fast.
+
+
+Slideshow : https://www.xfront.com/sld001.htm
